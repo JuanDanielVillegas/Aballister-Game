@@ -46,7 +46,7 @@ void Dungeons();
 
 int main()
 {
-    Dungeons();
+
     return 0;
 }
 
