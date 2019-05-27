@@ -31,7 +31,9 @@ const short unsigned int Keyleft  = 37; //left
 const short unsigned int Keytop   = 38; //up
 const short unsigned int Keyright = 39; //right
 const short unsigned int Keydown  = 40; //down
+int piso=0; /** El piso en el que se encuentra **/
 
+/** Estructura con todos los datos de un personaje **/
 struct stats{
 	string nombre; /** Es un string que guarda el nombre de los personajes **/
 	string seleccion="0"; /** Es un string que se pasa a entero en la seleccion de clase **/
@@ -54,7 +56,7 @@ struct{
     int y=1; //coordenada en y
 }player; //El jugador con sus coordenadas
 
-/** Funciones **/
+/** Prototipos de Funciones **/
 int getKey();
 void Dungeons();
 void room_move(int&, int&);
@@ -72,15 +74,10 @@ int player_sorter(stats a, stats b);
 void clase (stats &Hero,stats &Aballister, stats& Karsus);
 void seleccionClase(stats&Hero);
 void clear_screen();
-int movement_lv1();
 int getKey();
 void cstats(stats *,int,int,int,int,int,int,int,int,int,int);
 bool battle();
 void rings();
-
-
-int piso=0;
-
 
 int main()
 {
@@ -92,16 +89,18 @@ int main()
     return 0;
 }
 
-void Dungeons(){
+/** Definicion de Funciones **/
 
+
+void Dungeons(){
     /** Variables **/
     bool firstIteration=1; /** revisa que sea la primera iteracion y que sucedan las cosas de inicio **/
-    char niebla=177; /** valor ASCII que representa la niebla **/
+    char niebla=177;  /** valor ASCII que representa la niebla **/
     char muroooo=219; /** valor ASCII que representa el muro **/
     char pasillo=255; /** valor ASCII que representa el pasillo pasable plano donde las personas pasan **/
-    char enemigo=88; /** valor ASCII del enemigo **/
+    char enemigo=88;  /** valor ASCII del enemigo **/
     char bosssss=157; /** valor ASCII del boss de cada nivel **/
-    char itemmmm=42; /** valor ASCII para los items anillos **/
+    char itemmmm=42;  /** valor ASCII para los items anillos **/
     char ceroooo='0'; /** valor ASCII para el 0 **/
     char unooooo='1'; /** valor ASCII para el 1 **/
     char dosssss='2'; /** valor ASCII para el 2 **/
@@ -1957,198 +1956,6 @@ void level_opening(){
 	getch();
 	cout<<"INICIA LA AVENTURA"<<endl;
 	setlocale(LC_ALL, "C");
-}
-int movement_lv1(){
- 	/** Variables **/
-	bool firstIteration=1; /** revisa que sea la primera iteracion y que sucedan las cosas de inicio **/
-	char niebla=177; /** valor ascii que representa la niebla **/
-	char muro=219; /** valor ascii que representa el muro **/
-	char pasillo=255; /** valor ASCII que representa el pasillo pasable plano donde las personas pasan **/
-	const short int tamanioX=12; /** Centinela de la matriz en X **/
-	const short int tamanioY=12; /** Centinela de la matriz en Y **/
-
-	/** Matriz del mapa real que esta debajo de la niebla, aqui estan todos los datos funcionales del juego **/
-	char mapa[tamanioX][tamanioY]={// 0   	1   	2   	3   	4   	5   	6   	7   	8   	9  	10  	11  /**y**/
-         	/**x**/	/** 0 **/  muro,   muro,   muro,   muro,   muro,   muro,   muro,   muro,   muro,   muro,   muro,   muro,
-                    	/** 1 **/  muro,   muro,pasillo,   muro,   muro,pasillo,pasillo,pasillo,pasillo,   muro,   muro,   muro,
-                    	/** 2 **/  muro,   muro,pasillo,   muro,   muro,pasillo,pasillo,pasillo,pasillo,   muro,   muro,   muro,
-                    	/** 3 **/  muro,   muro,pasillo,   muro,   muro,pasillo,   muro,   muro,   muro,   muro,   muro,   muro,
-                    	/** 4 **/  muro,   muro,pasillo,   muro,   muro,pasillo,   muro,   muro,   muro,   muro,   muro,   muro,
-                    	/** 5 **/  muro,   muro,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,   muro,   muro,   muro,
-                    	/** 6 **/  muro,   muro,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,   muro,   muro,   muro,
-                    	/** 7 **/  muro,   muro,   muro,   muro,   muro,pasillo,   muro,   muro,pasillo,   muro,   muro,   muro,
-                    	/** 8 **/  muro,   muro,   muro,   muro,   muro,pasillo,   muro,   muro,pasillo,   muro,   muro,   muro,
-                    	/** 9 **/  muro,   muro,pasillo,pasillo,pasillo,pasillo,   muro,   muro,pasillo,   muro,   muro,   muro,
-                    	/** 10 **/ muro,   muro,pasillo,pasillo,pasillo,pasillo,   muro,   muro,pasillo,   muro,   muro,   muro,
-                    	/** 11 **/ muro,   muro,   muro,   muro,   muro,   muro,   muro,   muro,   muro,   muro,   muro,   muro};
-
-	/** c q se ve un desvergue pero esta mamalon **/
-	char mapaVisible[tamanioX][tamanioY]={niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                                      	niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                                      	niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                                      	niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                                      	niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                                      	niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                                      	niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                                      	niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                                      	niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                                      	niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                                      	niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                                      	niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla};
-
-	/** Vista del jugador a traves de la niebla en su alrededor cuando empieza **/
-	if(firstIteration)
-	{
-    	firstIteration=0; /** quita la primera iteracion **/
-
-    	/** TO DO **/
-    	for(int i=0;i<3;i++)
-    	{
-        	for(int j=0;j<3;j++)
-        	{
-            	mapaVisible[player.x-1+j][player.y-1+i]=mapa[player.x-1+j][player.y-1+i];
-        	}
-    	}
-    	mapaVisible[player.x][player.y]=64; /** /@-representa al jugador en el mapa **/
-	}
-
-	/** i es la coordenada y de la impresion de pantalla, j  es la coordenada x de la impresion de pantalla
-    	y k es el input de la tecla que se guarda como valor entero **/
-	int i=0,j=0,k=0;
-
-	while (true)
-	{
-    	for(i=11;i>=0;i--)
-    	{
-        	cout<<endl;
-        	for(j=0;j<12;j++)
-        	{
-            	cout<<mapaVisible[j][i];
-        	}
-    	}
-    	k = getKey();
-
-    	switch(k)
-    	{
-        	case Keyleft:
-        	{
-            	cout <<endl<< "you pressed : left" <<endl;
-            	try
-            	{
-                	player.x--;
-                	if(mapa[player.x][player.y]==muro)
-                	{
-                    	player.x++;
-                    	throw 1;
-                	}
-                	for(int i=0;i<3;i++)
-                	{
-                    	for(int j=0;j<3;j++)
-                    	{
-                        	mapaVisible[player.x-1+j][player.y-1+i]=mapa[player.x-1+j][player.y-1+i];
-                    	}
-                	}
-                	mapaVisible[player.x][player.y]=64;
-                	mapaVisible[player.x+1][player.y]=pasillo;
-            	}
-            	catch(int e)
-            	{
-                	cout<<endl<<"No se puede salir ;v"<<endl;
-            	}
-        	}
-        	break;
-        	case Keytop:
-        	{
-            	cout << endl<<"you pressed : up" <<endl;
-            	try
-            	{
-                	player.y++;
-                	if(mapa[player.x][player.y]==muro)
-                	{
-                    	player.y--;
-                    	throw 1;
-                	}
-                	for(int i=0;i<3;i++)
-                	{
-                    	for(int j=0;j<3;j++)
-                    	{
-                        	mapaVisible[player.x-1+j][player.y-1+i]=mapa[player.x-1+j][player.y-1+i];
-                    	}
-                	}
-                	mapaVisible[player.x][player.y]=64;
-                	mapaVisible[player.x][player.y-1]=pasillo;
-            	}
-            	catch(int e)
-            	{
-                	cout<<endl<<"No se puede salir ;v"<<endl;
-            	}
-        	}
-        	break;
-        	case Keyright:
-        	{
-            	cout << endl<<"you pressed : right" <<endl;
-            	try
-            	{
-                	player.x++;
-                	if(mapa[player.x][player.y]==muro)
-                	{
-                    	player.x--;
-                    	throw 1;
-                	}
-                	for(int i=0;i<3;i++)
-                	{
-                    	for(int j=0;j<3;j++)
-                    	{
-                        	mapaVisible[player.x-1+j][player.y-1+i]=mapa[player.x-1+j][player.y-1+i];
-                    	}
-                	}
-                	mapaVisible[player.x][player.y]=64;
-                	mapaVisible[player.x-1][player.y]=pasillo;
-            	}
-            	catch(int e)
-            	{
-                	cout<<endl<<"No se puede salir ;v"<<endl;
-            	}
-        	}
-        	break;
-        	case Keydown:
-        	{
-            	cout <<endl<< "you pressed : down" <<endl;
-            	try
-            	{
-                	player.y--;
-                	if(mapa[player.x][player.y]==muro)
-                	{
-                    	player.y++;
-                    	throw 1;
-                	}
-                	for(int i=0;i<3;i++)
-                	{
-                    	for(int j=0;j<3;j++)
-                    	{
-                        	mapaVisible[player.x-1+j][player.y-1+i]=mapa[player.x-1+j][player.y-1+i];
-                    	}
-                	}
-                	mapaVisible[player.x][player.y]=64;
-                	mapaVisible[player.x][player.y+1]=pasillo;
-            	}
-            	catch(int e)
-            	{
-                	cout<<endl<<"No se puede salir ;v"<<endl;
-            	}
-        	}
-        	break;
-        	default:
-            	{
-                	cout<<endl<<"Tecla No Valida"<<endl;
-            	}
-    	};
-    	Sleep(100);
-    	clear_screen();
-	}
-	system("pause");
-	return 0;
-
 }
 void clase (stats &Hero,stats& Aballister,stats &Karsus){
 
