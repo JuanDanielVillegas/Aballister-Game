@@ -67,7 +67,11 @@ int getKey();
 int roomevent();
 void cstats(stats *,int,int,int,int,int,int,int,int,int,int);
 bool battle();
+void rings();
+
+
 int piso=0;
+
 
 int main()
 {
@@ -79,8 +83,7 @@ int main()
     return 0;
 }
 
-void Dungeons()
-{
+void Dungeons(){
     /** Variables **/
     bool firstIteration=1; /** revisa que sea la primera iteracion y que sucedan las cosas de inicio **/
     char niebla=177; /** valor ascii que representa la niebla **/
@@ -113,9 +116,9 @@ void Dungeons()
                         /** 8 **/  muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
                         /** 9 **/  muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
                         /** 10 **/ muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,itemmmm,pasillo,pasillo,enemigo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 11 **/ muroooo,enemigo,pasillo,pasillo,pasillo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 11 **/ muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
                         /** 12 **/ muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 13 **/ muroooo,pasillo,ceroooo,unooooo,dosssss,enemigo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 13 **/ muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
                         /** 14 **/ muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
                         /** 15 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
                         /** 16 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
@@ -311,7 +314,7 @@ void Dungeons()
                         }
                     }
                     if(mapas[piso][player.x][player.y]==itemmmm)
-                        cout<<"Agarraste un Anillo Vibrador, mmm k rikolino"<<endl;
+                        rings();
                     else if(mapas[piso][player.x][player.y]>=48 && mapas[piso][player.x][player.y]<=57)
                     {
                         switch(mapas[piso][player.x][player.y])
@@ -456,7 +459,7 @@ void Dungeons()
                         }
                     }
                     if(mapas[piso][player.x][player.y]==itemmmm)
-                        cout<<"Agarraste un Anillo Vibrador, mmm k rikolino"<<endl;
+                        rings();
                     else if(mapas[piso][player.x][player.y]>=48 && mapas[piso][player.x][player.y]<=57)
                     {
                         switch(mapas[piso][player.x][player.y])
@@ -600,7 +603,7 @@ void Dungeons()
                         }
                     }
                     if(mapas[piso][player.x][player.y]==itemmmm)
-                        cout<<"Agarraste un Anillo Vibrador, mmm k rikolino"<<endl;
+                        rings();
                     else if(mapas[piso][player.x][player.y]>=48 && mapas[piso][player.x][player.y]<=57)
                     {
                         switch(mapas[piso][player.x][player.y])
@@ -674,7 +677,17 @@ void Dungeons()
                         }
                     }
                     else if(mapas[piso][player.x][player.y]==enemigo)
-                        cout<<"Ya valiste verga, sacate la cartera"<<endl;
+                        {
+                            if(battle())
+                                cout<<"Has ganado el combate, continua con tu aventura!"<<endl;
+                            else
+                            {
+                                clear_screen();
+                                cout<<"YOU DIED"<<endl;
+                                Sleep(1000);
+                                exit(1);
+                            }
+                        }
                     else if(mapas[piso][player.x][player.y]==bosssss)
                         {
                             for(int i=0;i<30;i++)
@@ -734,7 +747,7 @@ void Dungeons()
                     }
 
                     if(mapas[piso][player.x][player.y]==itemmmm)
-                        cout<<"Agarraste un Anillo Vibrador, mmm k rikolino"<<endl;
+                        rings();
                     else if(mapas[piso][player.x][player.y]>=48 && mapas[piso][player.x][player.y]<=57)
                     {
                         switch(mapas[piso][player.x][player.y])
@@ -1092,10 +1105,10 @@ void cstats(stats * members,int enemies,int t1,int t2,int t3,int t4,int t5,int b
 	for(int i=3;i<enemies+3;i++){
     	if(t1>=1){
         	members[i].nombre="Gnomo";
-        	members[i].ataque=20;
+        	members[i].ataque=10;
         	members[i].defensa=5;
         	members[i].magia=0;
-        	members[i].mvida=40;
+        	members[i].mvida=20;
         	members[i].velocidad=31;
         	members[i].vida=members[i].mvida;
         	members[i].vivo=true;
@@ -1107,10 +1120,10 @@ void cstats(stats * members,int enemies,int t1,int t2,int t3,int t4,int t5,int b
     	}
     	else if(t2>=1){
         	members[i].nombre="Elfo";
-        	members[i].ataque=30;
+        	members[i].ataque=20;
         	members[i].defensa=5;
         	members[i].magia=0;
-        	members[i].mvida=45;
+        	members[i].mvida=30;
         	members[i].velocidad=45;
         	members[i].vida=members[i].mvida;
         	members[i].vivo=true;
@@ -1215,10 +1228,10 @@ void cstats(stats * members,int enemies,int t1,int t2,int t3,int t4,int t5,int b
 
 }
 bool battle(){
-    int yeet,item,whoms,members,heros=0,width=30,enemies=0,type1=0,type2=0,type3=0,type4=0,type5=0,boss1=0,boss2=0,boss3=0,boss4=0;
+    int yeet,members,heros=0,width=30,enemies=0,type1=0,type2=0,type3=0,type4=0,type5=0,boss1=0,boss2=0,boss3=0,boss4=0;
     bool inbtl=true;
 	srand (time(NULL));
-    enemies=(rand() % 5 + 2);
+    enemies=(rand() % 3 + 2);
     members=enemies+3;
     yeet=enemies;
     stats member_b[members];
@@ -1277,6 +1290,96 @@ bool battle(){
 	else
     	return false;
 
+}
+void rings(){
+    int item=0,whomst=0;
+    srand(time(NULL));
+    item=(rand() % 3 + 1);
+    whomst=(rand() % 5 + 1);
+    cout<<"\n Te has encontrado un anillo magico";
+    switch(item){
+    case 1:
+        switch(whomst){
+        case 1:
+            Hero.ataque+=3;
+            cout<<"\n"<<Hero.nombre<<" att+3";
+            break;
+        case 2:
+            Aballister.ataque+=3;
+            cout<<"\n"<<Aballister.nombre<<" att+3";
+            break;
+        case 3:
+            Karsus.ataque+=3;
+            cout<<"\n"<<Karsus.nombre<<" att+3";
+            break;
+        }
+        break;
+    case 2:
+        switch(whomst){
+        case 1:
+            Hero.mvida+=3;
+            cout<<"\n"<<Hero.nombre<<" vida+3";
+            break;
+        case 2:
+            Aballister.mvida+=3;
+            cout<<"\n"<<Aballister.nombre<<" vida+3";
+            break;
+        case 3:
+            Karsus.mvida+=3;
+            cout<<"\n"<<Karsus.nombre<<" vida+3";
+            break;
+        }
+        break;
+    case 3:
+        switch(whomst){
+        case 1:
+            Hero.defensa+=3;
+            cout<<"\n"<<Hero.nombre<<" def+3";
+            break;
+        case 2:
+            Aballister.defensa+=3;
+            cout<<"\n"<<Aballister.nombre<<" def+3";
+            break;
+        case 3:
+            Karsus.defensa+=3;
+            cout<<"\n"<<Karsus.nombre<<" def+3";
+            break;
+        }
+        break;
+    case 4:
+        switch(whomst){
+        case 1:
+            Hero.magia+=3;
+            cout<<"\n"<<Hero.nombre<<" mg+3";
+            break;
+        case 2:
+            Aballister.magia+=3;
+            cout<<"\n"<<Aballister.nombre<<" mg+3";
+            break;
+        case 3:
+            Karsus.magia+=3;
+            cout<<"\n"<<Karsus.nombre<<" mg+3";
+            break;
+        }
+        break;
+    case 5:
+        switch(whomst){
+        case 1:
+            Hero.velocidad+=3;
+            cout<<"\n"<<Hero.nombre<<" vel+3";
+            break;
+        case 2:
+            Aballister.velocidad+=3;
+            cout<<"\n"<<Aballister.nombre<<" vel+3";
+            break;
+        case 3:
+            Karsus.velocidad+=3;
+            cout<<"\n"<<Karsus.nombre<<" vel+3";
+            break;
+        }
+        break;
+    }
+    Sleep(2000);
 }
 void pattacks(stats * member_b,int mem_num,int turn,int& enemies,int& heros){
 	clear_screen();
@@ -2263,7 +2366,7 @@ void seleccionClase(stats&Hero){
         	Hero.vida=65;
         	Hero.magia=5;
         	Hero.velocidad=20;
-        	Hero.attack=battacks;
+        	Hero.attack=gattacks;
         	break;
     	case 2:
         	cout<<"Se ha escogido la clase Rogue"<<endl;
