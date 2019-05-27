@@ -1,14 +1,28 @@
-#include <iostream>
-#include <stdlib.h>
-#include <windows.h>
-#include <conio.h>
-#include <locale.h>
-#include <wchar.h>
-#include <iomanip>
-#include <string>
-#include <algorithm>
-#include <time.h>
+/**
+ * @Programa: Roundabout: Aballister's Curse
+ * @Proposito: Demostrar nuestras habilidades de conceptos avanzados de programación
+ * @Asesor: Raymundo Cornejo García
+ * @Descripcion: Este programa es un RPG de un estilo muy retro puesto que esta hecho en la consola. Se trata de un explorador
+ *               de dungeons (calabozos) con batallas de turnos. Se podrán escoger 3 clases de las 5 que hay.
+ * @Fecha:27/05/2019
+ * @Autores:
+ * Hugo Edibray Becerra Gándara
+ * Juan Pablo Martinez Cantú
+ * Axel Dalí Gomez Morales
+ * Daniel Alberto Cota Ochoa
+ * Rubén Domínguez Chávez
+**/
 
+#include <iostream> //cout, cin
+#include <stdlib.h> //srand, rand
+#include <windows.h> //system
+#include <conio.h> //getch
+#include <locale.h> //locale
+#include <wchar.h> //getch
+#include <iomanip> //setw
+#include <string> //stoi
+#include <algorithm> //sort
+#include <time.h> //time
 
 using namespace std;
 
@@ -17,34 +31,30 @@ const short unsigned int Keyleft  = 37; //left
 const short unsigned int Keytop   = 38; //up
 const short unsigned int Keyright = 39; //right
 const short unsigned int Keydown  = 40; //down
-const short unsigned int Keyexit  = 81; //q
-
 
 struct stats{
-	string nombre;
-	string seleccion="0";
-	int ataque=10;
-	int mvida=50;
-	int vida=mvida;
-	int defensa=10;
-	int velocidad=10;
-	int magia=10;
-	bool vivo=true;
-	bool amigo=true;
+	string nombre; /** Es un string que guarda el nombre de los personajes **/
+	string seleccion="0"; /** Es un string que se pasa a entero en la seleccion de clase **/
+	int ataque=10; /** Valor de Ataque de los personajes **/
+	int mvida=50; /** Valor maxima de puntos de vida de los personajes **/
+	int vida=mvida; /** Valor de los puntos actuales de los personajes**/
+	int defensa=10; /** Valor para resistir ataques o anularlos **/
+	int velocidad=10; /** Valor para saber la secuencia de los turnos **/
+	int magia=10; /** Valor mágico que será el ataque del mago **/
+	bool vivo=true; /** Valor booleano para saber si esta vivo o no **/
+	bool amigo=true; /** Valor para saber si es de tu equipo o no, esto es para los ataques **/
 
-	void (*attack)(stats *,int,int,int&,int&);
-}Hero,Karsus,Aballister;
-
+	void (*attack)(stats *,int,int,int&,int&); /** Es un apuntador de funciones para definir los atques (se definen más adelante **/
+}Hero,Karsus,Aballister; //Estos son nuestros heroicos personajes jaja amiga a que horas sales por el pan o te pega el nobio. amiwa daate kuentha
 
 /** Estructura del player en el mapa **/
 struct{
     /** coordenadas donde inicia **/
     int x=13; //coordenada en x
     int y=1; //coordenada en y
-}player;
+}player; //El jugador con sus coordenadas
 
 /** Funciones **/
-void clear_screen();
 int getKey();
 void Dungeons();
 void room_move(int&, int&);
@@ -64,7 +74,6 @@ void seleccionClase(stats&Hero);
 void clear_screen();
 int movement_lv1();
 int getKey();
-int roomevent();
 void cstats(stats *,int,int,int,int,int,int,int,int,int,int);
 bool battle();
 void rings();
@@ -84,24 +93,25 @@ int main()
 }
 
 void Dungeons(){
+
     /** Variables **/
     bool firstIteration=1; /** revisa que sea la primera iteracion y que sucedan las cosas de inicio **/
-    char niebla=177; /** valor ascii que representa la niebla **/
-    char muroooo=219; /** valor ascii que representa el muro **/
+    char niebla=177; /** valor ASCII que representa la niebla **/
+    char muroooo=219; /** valor ASCII que representa el muro **/
     char pasillo=255; /** valor ASCII que representa el pasillo pasable plano donde las personas pasan **/
     char enemigo=88; /** valor ASCII del enemigo **/
     char bosssss=157; /** valor ASCII del boss de cada nivel **/
     char itemmmm=42; /** valor ASCII para los items anillos **/
-    char ceroooo='0';
-    char unooooo='1';
-    char dosssss='2';
-    char tressss='3';
-    char cuatroo='4';
-    char cincooo='5';
-    char seissss='6';
-    char sieteee='7';
-    char ochoooo='8';
-    char nueveee='9';
+    char ceroooo='0'; /** valor ASCII para el 0 **/
+    char unooooo='1'; /** valor ASCII para el 1 **/
+    char dosssss='2'; /** valor ASCII para el 2 **/
+    char tressss='3'; /** valor ASCII para el 3 **/
+    char cuatroo='4'; /** valor ASCII para el 4 **/
+    char cincooo='5'; /** valor ASCII para el 5 **/
+    char seissss='6'; /** valor ASCII para el 6 **/
+    char sieteee='7'; /** valor ASCII para el 7 **/
+    char ochoooo='8'; /** valor ASCII para el 8 **/
+    char nueveee='9'; /** valor ASCII para el 9 **/
 
     /** Matriz del mapa real que esta debajo de la niebla, aqui estan todos los datos funcionales del juego **/
     char mapas[4][30][40]={        //  0       1       2       3       4       5       6       7       8       9       10      11      12      13      14      15      16      17      18      19      20      21      22      23      24      25      26      27      28      29      30      31      32      33      34      35      36      37      38      39      /**y**/
@@ -916,150 +926,7 @@ int getKey(){
 		}
 	}
 }
-int roomevent(){
-	/*int yeet,item,whomst,enemies=0,type1=0,type2=0,type3=0,type4=0,type5=0,boss1=0,boss2=0,boss3=0,boss4=0,boss5=0;
-	srand (time(NULL));
-	switch(){
-	case 1://battle
 
-    	enemies=3;
-    	type1=2;
-    	type2=1;
-    	break;
-	case 2://iteams
-    	item=(rand() % 3 + 1);
-    	whomst=(rand() % 5 + 1);
-    	cout<<"\n Te has encontrado un anillo magico";
-    	switch(item){
-    	case 1:
-        	switch(whomst){
-        	case 1:
-            	Hero.ataque+=3;
-            	cout<<"\n"<<Hero.nombre<<" att+3";
-            	break;
-        	case 2:
-            	Aballister.ataque+=3;
-            	cout<<"\n"<<Aballister.nombre<<" att+3";
-            	break;
-        	case 3:
-            	Karsus.ataque+=3;
-            	cout<<"\n"<<Karsus.nombre<<" att+3";
-            	break;
-        	}
-        	break;
-    	case 2:
-        	switch(whomst){
-        	case 1:
-            	Hero.mvida+=3;
-            	cout<<"\n"<<Hero.nombre<<" vida+3";
-            	break;
-        	case 2:
-            	Aballister.mvida+=3;
-            	cout<<"\n"<<Aballister.nombre<<" vida+3";
-            	break;
-        	case 3:
-            	Karsus.mvida+=3;
-            	cout<<"\n"<<Karsus.nombre<<" vida+3";
-            	break;
-        	}
-        	break;
-    	case 3:
-        	switch(whomst){
-        	case 1:
-            	Hero.defensa+=3;
-            	cout<<"\n"<<Hero.nombre<<" def+3";
-            	break;
-        	case 2:
-            	Aballister.defensa+=3;
-            	cout<<"\n"<<Aballister.nombre<<" def+3";
-            	break;
-        	case 3:
-            	Karsus.defensa+=3;
-            	cout<<"\n"<<Karsus.nombre<<" def+3";
-            	break;
-        	}
-        	break;
-    	case 4:
-        	switch(whomst){
-        	case 1:
-            	Hero.magia+=3;
-            	cout<<"\n"<<Hero.nombre<<" mg+3";
-            	break;
-        	case 2:
-            	Aballister.magia+=3;
-            	cout<<"\n"<<Aballister.nombre<<" mg+3";
-            	break;
-        	case 3:
-            	Karsus.magia+=3;
-            	cout<<"\n"<<Karsus.nombre<<" mg+3";
-            	break;
-        	}
-        	break;
-    	case 5:
-        	switch(whomst){
-        	case 1:
-            	Hero.velocidad+=3;
-            	cout<<"\n"<<Hero.nombre<<" vel+3";
-            	break;
-        	case 2:
-            	Aballister.velocidad+=3;
-            	cout<<"\n"<<Aballister.nombre<<" vel+3";
-            	break;
-        	case 3:
-            	Karsus.velocidad+=3;
-            	cout<<"\n"<<Karsus.nombre<<" vel+3";
-            	break;
-        	}
-        	break;
-    	}
-    	break;
-	case 3://battles
-    	enemies=(rand() % 5 + 2);
-    	yeet=enemies;
-    	switch(piso){
-    	case 1:
-        	type2++;
-        	yeet--;
-        	for(int i=0;i<yeet;i++)
-            	type1++;
-            	break;
-    	case 2:
-        	type3++;
-        	yeet--;
-        	for(int i=0;i<yeet;i++)
-            	type1++;
-            	break;
-    	case 3:
-        	type4++;
-        	yeet--;
-        	for(int i=0;i<yeet;i++)
-            	type1++;
-            	break;
-    	case 4:
-        	type5++;
-        	yeet--;
-        	for(int i=0;i<yeet;i++)
-            	type2++;
-            	break;
-    	}
-    	break;
-	}
-	if(enemies>0){
-    	stats battle_b[enemies+3];
-    	cstats(battle_b,enemies,type1,type2,type3,type4,type5,boss1,boss2,boss3,boss4);
-    	if(battle(battle_b,enemies)){
-        	cout<<"\nContinuas la adventura!!!";
-        	//continue game
-    	}
-    	else{
-        	cout<<"\nYOU DIED";
-        	//return value for died and exit game
-    	}
-	}
-	else
-    	cout<<"\nno hay nada\n";*/
-
-}
 void cstats(stats * members,int enemies,int t1,int t2,int t3,int t4,int t5,int b1,int b2,int b3,int b4){
 	members[0].nombre=Hero.nombre;
 	members[0].ataque=Hero.ataque;
@@ -1230,7 +1097,7 @@ void cstats(stats * members,int enemies,int t1,int t2,int t3,int t4,int t5,int b
 bool battle(){
     int yeet,members,heros=0,width=30,enemies=0,type1=0,type2=0,type3=0,type4=0,type5=0,boss1=0,boss2=0,boss3=0,boss4=0;
     bool inbtl=true;
-	srand (time(NULL));
+	srand(time(NULL));
     enemies=(rand() % 3 + 2);
     members=enemies+3;
     yeet=enemies;
