@@ -1,0 +1,185 @@
+#include<iostream>
+#include<unistd.h>
+#include<stdlib.h>
+#include<string>
+#include<vector>
+#include<windows.h>
+#include<conio.h>
+#include<locale.h>
+#include<iomanip>
+#include<wchar.h>
+
+using namespace std;
+
+void menu();
+void moveText();
+void informacion();
+void display();
+bool isValidInt(string numeroEnCadena);
+void clear_screen();
+
+int index1 , index2, index3, counter1, counter2, counter3, textT=1, size, speed;
+
+int main()
+{
+    menu();
+    return 0;
+}
+
+void moveText(){
+    size = 78;
+    counter1 = 0;
+    counter2 = 0;
+    counter3 = 0;
+    speed = 50;
+}
+
+void informacion(){
+    int auxiliarInf=0;
+    cout << "Aqui aparecera la informacion" << endl;
+    cout << "Ingrese un 1 para regresar al menu" << endl;
+    cout << "Ingrese un 0 para cerrar el juego" << endl;
+    cin>>auxiliarInf;
+    clear_screen();
+    ///Copiar try-catch de menu alv
+    switch(auxiliarInf){
+        case 1:
+            clear_screen();
+            menu();
+            break;
+        case 0:
+            cout<< "Programa cerrado";
+            break;
+        default:
+            clear_screen();
+                cout << "Error: Undefind choice." << endl;
+                break;
+    }
+}
+void menu(){
+    string userChoice;
+    bool Valido=false;
+    while(Valido==false){
+        moveText();
+        display();
+        cout<< "  Tu seleccion: ";
+        cin >> userChoice;
+        try{
+            if(isValidInt(userChoice)==true){
+                int choice= stoi(userChoice);
+                if(choice==1){
+                    Valido=true;
+                    cout<< "Por implementar";
+                }
+                else if(choice==2){
+                    Valido=true;
+                    clear_screen();
+                    informacion();
+                }
+                else if(choice==3){
+                    Valido=true;
+                    clear_screen();;
+                    cout << "Programa cerrado" << endl;
+                }
+                else{
+                    throw "Opcion no valida\n";
+                }
+            } else{
+                throw "Opcion no valida\n";
+            }
+        }
+        catch(const char* msg){
+            cout<< msg;
+            getch();
+            Valido= false;
+        }
+    }
+}
+void display(){
+    string S1= "----------------------- ROUNDABOUT: ABALLISTER'S CURSE -----------------------";
+    string S2= "==============================================================================";
+    string S3= " 1. Iniciar juego                                                             ";
+    string S4= " 2. Informacion                                                               ";
+    string S5= " 3. Salir                                                                     ";
+    counter1 = size;
+    counter2 = size;
+    for(index1 = 1; index1 <= textT; index1++){
+        for(index2 = 0; index2 <= size ; index2++){
+            for(index3 = counter2; index3 < size ; index3++){
+                cout << S1[index3];
+            }
+
+            cout << endl;
+
+            for(index3 = counter2; index3 < size ; index3++){
+                cout << (char)206;
+            }
+
+            cout << endl;
+
+            cout<< "\n";
+            for(index3 = counter2; index3 < size ; index3++){
+                cout << S2[index3];
+            }
+            cout<< "\n";
+            for(index3 = counter2; index3 < size ; index3++){
+                cout << S3[index3];
+            }
+            cout<< "\n";
+            for(index3 = counter2; index3 < size ; index3++){
+                cout << S4[index3];
+            }
+            cout<< "\n";
+            for(index3 = counter2; index3 < size ; index3++){
+                cout << S5[index3];
+            }
+            cout<< "\n";
+            cout<< "\n";
+            counter2--;
+            Sleep(speed);
+            if(index2< size)
+                clear_screen();
+        }
+    }
+}
+
+bool isValidInt(string numeroEnCadena){
+	int inicio = 0;
+	int i=0;
+	bool valido = true;
+	bool signo = false;
+
+	int tamanioDeCadena = numeroEnCadena.size();
+
+	if(tamanioDeCadena == 0)
+    	valido = 0;
+	for(i=0; valido && i<tamanioDeCadena; i++){
+    	if(!isdigit(numeroEnCadena.at(i)))
+        	valido = false;
+	}
+
+	return valido;
+}
+
+void clear_screen(){
+  DWORD n;                         /* Number of characters written */
+  DWORD size;                      /* number of visible characters */
+  COORD coord = {0};               /* Top left screen position */
+  CONSOLE_SCREEN_BUFFER_INFO csbi;
+
+  /* Get a handle to the console */
+  HANDLE h = GetStdHandle ( STD_OUTPUT_HANDLE );
+
+  GetConsoleScreenBufferInfo ( h, &csbi );
+
+  /* Find the number of characters to overwrite */
+  size = csbi.dwSize.X * csbi.dwSize.Y;
+
+  /* Overwrite the screen buffer with whitespace */
+  FillConsoleOutputCharacter ( h, TEXT ( ' ' ), size, coord, &n );
+  GetConsoleScreenBufferInfo ( h, &csbi );
+  FillConsoleOutputAttribute ( h, csbi.wAttributes, size, coord, &n );
+
+  /* Reset the cursor to the top left position */
+  SetConsoleCursorPosition ( h, coord );
+}
