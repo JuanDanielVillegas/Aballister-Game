@@ -39,6 +39,182 @@ int counter1; /**Ancho del menú cada vez que se imprime**/
 int textT=1;
 int size=78; /**Ancho maximo del menú**/
 int speed=50; /**Velocidad a la que se desppliega el menú**/
+/** Variables **/
+    bool firstIteration = 1; /** revisa que sea la primera iteracion y que sucedan las cosas de inicio **/
+    char niebla = 177;  /** valor ASCII que representa la niebla **/
+    char muroooo = 219; /** valor ASCII que representa el muro **/
+    char pasillo = 255; /** valor ASCII que representa el pasillo pasable plano donde las personas pasan **/
+    char enemigo = 88;  /** valor ASCII del enemigo **/
+    char bosssss = 157; /** valor ASCII del boss de cada nivel **/
+    char itemmmm = 42;  /** valor ASCII para los items anillos **/
+    char ceroooo = '0'; /** valor ASCII para el 0 **/
+    char unooooo = '1'; /** valor ASCII para el 1 **/
+    char dosssss = '2'; /** valor ASCII para el 2 **/
+    char tressss = '3'; /** valor ASCII para el 3 **/
+    char cuatroo = '4'; /** valor ASCII para el 4 **/
+    char cincooo = '5'; /** valor ASCII para el 5 **/
+    char seissss = '6'; /** valor ASCII para el 6 **/
+    char sieteee = '7'; /** valor ASCII para el 7 **/
+    char ochoooo = '8'; /** valor ASCII para el 8 **/
+    char nueveee = '9'; /** valor ASCII para el 9 **/
+
+    /** Matriz de los 4 mapas real que esta debajo de la niebla, aqui estan todos los datos funcionales del juego **/
+    char mapas[4][30] [30]={    //  0       1       2       3       4       5       6       7       8       9       10      11      12      13      14      15      16      17      18      19      20      21      22      23      24      25      26      27      28      29
+             /**x**/    /** 0 **/  muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 1 **/  muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,bosssss,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 2 **/  muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 3 **/  muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 4 **/  muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 5 **/  muroooo,itemmmm,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 6 **/  muroooo,pasillo,pasillo,pasillo,pasillo,enemigo,pasillo,pasillo,pasillo,pasillo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 7 **/  muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 8 **/  muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 9 **/  muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 10 **/ muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,itemmmm,pasillo,pasillo,enemigo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 11 **/ muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 12 **/ muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 13 **/ muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 14 **/ muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 15 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 16 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 17 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 18 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 19 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 20 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 21 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 22 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 23 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 24 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 25 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 26 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 27 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 28 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 29 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                               //  0       1       2       3       4       5       6       7       8       9       10      11      12      13      14      15      16      17      18      19      20      21      22      23      24      25      26      27      28      29
+             /**x**/    /** 0 **/  muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 1 **/  muroooo,bosssss,muroooo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,enemigo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 2 **/  muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 3 **/  muroooo,pasillo,pasillo,pasillo,muroooo,muroooo,enemigo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 4 **/  muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 5 **/  muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,enemigo,pasillo,pasillo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 6 **/  muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 7 **/  muroooo,itemmmm,pasillo,pasillo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,pasillo,pasillo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 8 **/  muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 9 **/  muroooo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,enemigo,pasillo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 10 **/ muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 11 **/ muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,enemigo,pasillo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 12 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 13 **/ muroooo,pasillo,muroooo,pasillo,muroooo,enemigo,pasillo,pasillo,pasillo,pasillo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 14 **/ muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 15 **/ muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 16 **/ muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 17 **/ muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,tressss,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 18 **/ muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,itemmmm,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 19 **/ muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 20 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 21 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 22 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 23 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 24 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 25 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 26 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 27 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 28 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 29 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                               //  0       1       2       3       4       5       6       7       8       9       10      11      12      13      14      15      16      17      18      19      20      21      22      23      24      25      26      27      28      29
+             /**x**/    /** 0 **/  muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 1 **/  muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,enemigo,muroooo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,bosssss,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 2 **/  muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,pasillo,pasillo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 3 **/  muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 4 **/  muroooo,enemigo,pasillo,pasillo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,seissss,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 5 **/  muroooo,cuatroo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 6 **/  muroooo,pasillo,muroooo,muroooo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,itemmmm,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 7 **/  muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 8 **/  muroooo,pasillo,muroooo,muroooo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,enemigo,pasillo,pasillo,cincooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 9 **/  muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 10 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 11 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 12 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 13 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 14 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 15 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 16 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 17 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 18 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 19 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 20 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 21 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 22 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 23 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 24 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 25 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 26 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 27 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 28 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                        /** 29 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
+                               //  0       1       2       3       4       5       6       7       8       9       10      11      12      13      14      15      16      17      18      19      20      21      22      23      24      25      26      27      28      29
+             /**x**/    /** 0 **/  muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,
+                        /** 1 **/  muroooo,enemigo,pasillo,pasillo,pasillo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,sieteee,pasillo,pasillo,pasillo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,
+                        /** 2 **/  muroooo,pasillo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,
+                        /** 3 **/  muroooo,pasillo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,bosssss,muroooo,
+                        /** 4 **/  muroooo,pasillo,muroooo,muroooo,muroooo,pasillo,muroooo,enemigo,pasillo,pasillo,muroooo,pasillo,pasillo,pasillo,muroooo,enemigo,muroooo,enemigo,muroooo,muroooo,enemigo,muroooo,muroooo,enemigo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,
+                        /** 5 **/  muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,
+                        /** 6 **/  muroooo,pasillo,muroooo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,
+                        /** 7 **/  muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,itemmmm,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,enemigo,muroooo,
+                        /** 8 **/  muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,
+                        /** 9 **/  muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,ochoooo,pasillo,pasillo,pasillo,pasillo,pasillo,enemigo,muroooo,muroooo,muroooo,enemigo,pasillo,pasillo,muroooo,pasillo,muroooo,
+                        /** 10 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,
+                        /** 11 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,
+                        /** 12 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,
+                        /** 13 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,
+                        /** 14 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,
+                        /** 15 **/ muroooo,enemigo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,
+                        /** 16 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,pasillo,enemigo,muroooo,
+                        /** 17 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,
+                        /** 18 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,
+                        /** 19 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,nueveee,muroooo,muroooo,muroooo,muroooo,muroooo,
+                        /** 20 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,
+                        /** 21 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,
+                        /** 22 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,itemmmm,muroooo,
+                        /** 23 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,pasillo,enemigo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,pasillo,muroooo,
+                        /** 24 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,
+                        /** 25 **/ muroooo,pasillo,muroooo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,
+                        /** 26 **/ muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,
+                        /** 27 **/ muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,
+                        /** 28 **/ muroooo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,ochoooo,itemmmm,muroooo,
+                        /** 29 **/ muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo};
+
+
+    char mapaVisible[30][30]={niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
+                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla};
 
 /** Estructura con todos los datos de un personaje **/
 struct stats
@@ -94,6 +270,7 @@ int getKey();
 void cstats(stats*, int, int, int, int, int, int, int, int, int, int);
 bool battle();
 void rings();
+void eventroom();
 
 int main()
 {
@@ -101,12 +278,10 @@ int main()
     Aballister.nombre = "Aballister";
     Karsus.nombre = "Karsus";
     menu();
-    if(gameOn==true){
-        level_opening();
-        Dungeons();
-        gameOn=false;
-        t1.join(); ///Este al final, donde termina el juego igualar gameOn= false
-    }
+    level_opening();
+    Dungeons();
+    gameOn=false;
+    t1.join(); ///Este al final, donde termina el juego igualar gameOn= false
     return 0;
 }
 
@@ -303,187 +478,10 @@ void timerThread(){
     cout<<"  La partida duro " << horas<<":"<<minutos<<":"<<seg<<endl;
 }
 void Dungeons(){
-    /** Variables **/
-    bool firstIteration = 1; /** revisa que sea la primera iteracion y que sucedan las cosas de inicio **/
-    char niebla = 177;  /** valor ASCII que representa la niebla **/
-    char muroooo = 219; /** valor ASCII que representa el muro **/
-    char pasillo = 255; /** valor ASCII que representa el pasillo pasable plano donde las personas pasan **/
-    char enemigo = 88;  /** valor ASCII del enemigo **/
-    char bosssss = 157; /** valor ASCII del boss de cada nivel **/
-    char itemmmm = 42;  /** valor ASCII para los items anillos **/
-    char ceroooo = '0'; /** valor ASCII para el 0 **/
-    char unooooo = '1'; /** valor ASCII para el 1 **/
-    char dosssss = '2'; /** valor ASCII para el 2 **/
-    char tressss = '3'; /** valor ASCII para el 3 **/
-    char cuatroo = '4'; /** valor ASCII para el 4 **/
-    char cincooo = '5'; /** valor ASCII para el 5 **/
-    char seissss = '6'; /** valor ASCII para el 6 **/
-    char sieteee = '7'; /** valor ASCII para el 7 **/
-    char ochoooo = '8'; /** valor ASCII para el 8 **/
-    char nueveee = '9'; /** valor ASCII para el 9 **/
-
-    /** Matriz de los 4 mapas real que esta debajo de la niebla, aqui estan todos los datos funcionales del juego **/
-    char mapas[4][30] [30]={    //  0       1       2       3       4       5       6       7       8       9       10      11      12      13      14      15      16      17      18      19      20      21      22      23      24      25      26      27      28      29
-             /**x**/    /** 0 **/  muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 1 **/  muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,bosssss,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 2 **/  muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 3 **/  muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 4 **/  muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 5 **/  muroooo,itemmmm,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 6 **/  muroooo,pasillo,pasillo,pasillo,pasillo,enemigo,pasillo,pasillo,pasillo,pasillo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 7 **/  muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 8 **/  muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 9 **/  muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 10 **/ muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,itemmmm,pasillo,pasillo,enemigo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 11 **/ muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 12 **/ muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 13 **/ muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 14 **/ muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 15 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 16 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 17 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 18 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 19 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 20 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 21 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 22 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 23 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 24 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 25 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 26 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 27 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 28 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 29 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                               //  0       1       2       3       4       5       6       7       8       9       10      11      12      13      14      15      16      17      18      19      20      21      22      23      24      25      26      27      28      29
-             /**x**/    /** 0 **/  muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 1 **/  muroooo,bosssss,muroooo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,enemigo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 2 **/  muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 3 **/  muroooo,pasillo,pasillo,pasillo,muroooo,muroooo,enemigo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 4 **/  muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 5 **/  muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,enemigo,pasillo,pasillo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 6 **/  muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 7 **/  muroooo,itemmmm,pasillo,pasillo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,pasillo,pasillo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 8 **/  muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 9 **/  muroooo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,enemigo,pasillo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 10 **/ muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 11 **/ muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,enemigo,pasillo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 12 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 13 **/ muroooo,pasillo,muroooo,pasillo,muroooo,enemigo,pasillo,pasillo,pasillo,pasillo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 14 **/ muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 15 **/ muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 16 **/ muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 17 **/ muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,tressss,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 18 **/ muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,itemmmm,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 19 **/ muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 20 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 21 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 22 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 23 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 24 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 25 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 26 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 27 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 28 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 29 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                               //  0       1       2       3       4       5       6       7       8       9       10      11      12      13      14      15      16      17      18      19      20      21      22      23      24      25      26      27      28      29
-             /**x**/    /** 0 **/  muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 1 **/  muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,enemigo,muroooo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,bosssss,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 2 **/  muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,pasillo,pasillo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 3 **/  muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 4 **/  muroooo,enemigo,pasillo,pasillo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,seissss,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 5 **/  muroooo,cuatroo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 6 **/  muroooo,pasillo,muroooo,muroooo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,itemmmm,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 7 **/  muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 8 **/  muroooo,pasillo,muroooo,muroooo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,enemigo,pasillo,pasillo,cincooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 9 **/  muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 10 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 11 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 12 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 13 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 14 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 15 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 16 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 17 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 18 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 19 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 20 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 21 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 22 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 23 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 24 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 25 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 26 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 27 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 28 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                        /** 29 **/ pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,
-                               //  0       1       2       3       4       5       6       7       8       9       10      11      12      13      14      15      16      17      18      19      20      21      22      23      24      25      26      27      28      29
-             /**x**/    /** 0 **/  muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,
-                        /** 1 **/  muroooo,enemigo,pasillo,pasillo,pasillo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,sieteee,pasillo,pasillo,pasillo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,
-                        /** 2 **/  muroooo,pasillo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,
-                        /** 3 **/  muroooo,pasillo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,bosssss,muroooo,
-                        /** 4 **/  muroooo,pasillo,muroooo,muroooo,muroooo,pasillo,muroooo,enemigo,pasillo,pasillo,muroooo,pasillo,pasillo,pasillo,muroooo,enemigo,muroooo,enemigo,muroooo,muroooo,enemigo,muroooo,muroooo,enemigo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,
-                        /** 5 **/  muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,
-                        /** 6 **/  muroooo,pasillo,muroooo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,
-                        /** 7 **/  muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,itemmmm,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,enemigo,muroooo,
-                        /** 8 **/  muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,
-                        /** 9 **/  muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,ochoooo,pasillo,pasillo,pasillo,pasillo,pasillo,enemigo,muroooo,muroooo,muroooo,enemigo,pasillo,pasillo,muroooo,pasillo,muroooo,
-                        /** 10 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,
-                        /** 11 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,
-                        /** 12 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,
-                        /** 13 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,
-                        /** 14 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,
-                        /** 15 **/ muroooo,enemigo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,
-                        /** 16 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,pasillo,enemigo,muroooo,
-                        /** 17 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,
-                        /** 18 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,
-                        /** 19 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,pasillo,pasillo,nueveee,muroooo,muroooo,muroooo,muroooo,muroooo,
-                        /** 20 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,
-                        /** 21 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,
-                        /** 22 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,itemmmm,muroooo,
-                        /** 23 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,pasillo,pasillo,enemigo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,pasillo,muroooo,
-                        /** 24 **/ muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,
-                        /** 25 **/ muroooo,pasillo,muroooo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,pasillo,muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,pasillo,muroooo,
-                        /** 26 **/ muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,muroooo,
-                        /** 27 **/ muroooo,pasillo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,
-                        /** 28 **/ muroooo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,enemigo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,pasillo,ochoooo,itemmmm,muroooo,
-                        /** 29 **/ muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo,muroooo};
-
-
-    char mapaVisible[30][30]={niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,
-                              niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla,niebla};
-
 
     /** i es la coordenada y de la impresion de pantalla, j  es la coordenada x de la impresion de pantalla
         y k es el input de la tecla que se guarda como valor entero **/
-	int i = 0, j = 0, k = 0;
+	int i=0,j=0,k=0;
 
 	while (true)
 	{
@@ -497,7 +495,7 @@ void Dungeons(){
             {
                 for(int j=0;j<3;j++)
                 {
-                    mapaVisible[player.x - 1 + j][player.y - 1 + i]=mapas[piso][player.x - 1 + j][player.y - 1 + i];
+                    mapaVisible[player.x-1+j][player.y-1+i]=mapas[piso][player.x-1+j][player.y-1+i];
                 }
             }
             mapaVisible[player.x][player.y]=64; /** /@-representa al jugador en el mapa **/
@@ -525,131 +523,10 @@ void Dungeons(){
                         player.y++;
                         throw 1;
                     }
-                    for(int i=0;i<3;i++)
-                    {
-                        for(int j=0;j<3;j++)
-                        {
-                            mapaVisible[player.x - 1 + j][player.y - 1 + i]=mapas[piso][player.x - 1 + j][player.y - 1 + i];
-                        }
-                    }
-                    if(mapas[piso][player.x][player.y]==itemmmm)
-                        rings();
-                    else if(mapas[piso][player.x][player.y]>=48 && mapas[piso][player.x][player.y]<=57)
-                    {
-                        switch(mapas[piso][player.x][player.y])
-                        {
-                            case '0':
-                                //PRIMER DIALOGO
-                                cout<<"A lo largo de estas dungeons, encontraras varios enemigos, items especiales, y notas que te contaran parte de la historia";
-                                Sleep(5000);
-                                break;
-                            case '1':
-                                 //SEGUNDO DIALOGO
-                                cout<<"No te dejes engañar por los varios caminos que encontras"
-                                    << " recuerda la importante recompensa que se encuentra al final de esta inmensa cueva"<<endl;
-                                Sleep(6000);
-                                break;
-                            case '2':
-                                //TERCER DIALOGO
-                                cout<<"A continuacion te encontraras con unos enemigo"
-                                    <<" Debes seleccionar el ataque y a quien deseas atacar"<<endl;
-                                Sleep(5500);
-                                break;
-                            case '3':
-                                //PRIMER MENSAJE, SEGUNDO NIVEL
-                                cout<<"Varios lo han intentado, pero ninguno lo ha conseguido"<<endl;
-                                Sleep(3000);
-                                cout<<" Todos vienen por el mismo artefacto, pero los guardianes se los han impedido"<<endl;
-                                Sleep(3000);
-                                break;
-                            case '4':
-                                //ANTES DEL PRIMER ENEMIGO DEL TERCER NIVEL
-                                cout<<"Aballister: 'A partir de ahora nuestros enemigos seran mas fuertes'"<<endl;
-                                Sleep(4000);
-                                cout<<"Karsus:'¿Tu como lo sabes?"<<endl;
-                                Sleep(3000);
-                                cout<<"Aballister: 'Me contaron por ahi...unos conocidos"<<endl;
-                                Sleep(3000);
-                                break;
-                            case '5':
-                                 //FINAL DEL PRIMER PASILLO QUE NO ES
-                                cout<<"Felicidades por su perseverancia, pero me temo que han tomado el camino equivocado"<<endl;
-                                cout<<"Como todos los que vinieron antes que ustedes"<<endl;
-                                Sleep(7000);
-                                break;
-                            case '6':
-                                //AL FINAL DEL PASILLO
-                                cout<<"Que ironia, parece ser que estan siguiendo los mismos pasos que aquellos que estan muertos"<<endl;
-                                cout<<"Y parece, que alguien los esta guiando"<<endl;
-                                Sleep(7000);
-                                break;
-                            case '7':
-                                //MENSAJE 1 DEL NIVEL 4, RUBEN DICE DONDE SE PONE
-                                cout<<"Puede que se esten volviendo locos, o que alguien, los quiere ver morir"<<endl;
-                                Sleep(4000);
-                                break;
-                            case '8':
-                                 //MENSAJE 2 DEL NIVEL 4
-                                cout<<"¿Realmente valdra la pena sacrificarlo todo, por obtener riqueza infinita?"<<endl;
-                                Sleep(4000);
-                                break;
-                            case '9':
-                                //MENSAJE 3 DEL NIVEL 4
-                                cout<<Hero.nombre<<" encuentra una carta que dice lo siguiente: "<<endl;
-                                Sleep(3000);
-                                cout<<"'Corre, alguien esta a punto de tra...'"<<endl;
-                                Sleep(3000);
-                                cout<<"Aballister toma la carta y la rompe y dice 'Hay que dejar de leer esas tonterias, solo nos hacen daño"<<endl;
-                                Sleep(3000);
-                                cout<<"Karsus : 'Creo que es mejor seguir, aunque yo mantendria mis ojos abiertos"<<endl;
-                                Sleep(3000);
-                                break;
-                        }
-                    }
-                    else if(mapas[piso][player.x][player.y]==enemigo)
-                        {
-                            if(battle())
-                                cout<<"Has ganado el combate, continua con tu aventura!"<<endl;
-                            else
-                            {
-                                clear_screen();
-                                cout<<"YOU DIED"<<endl;
-                                Sleep(1000);
-                                getch;
-                                exit(1);
-                            }
-
-                        }
-                    else if(mapas[piso][player.x][player.y]==bosssss)
-                        {
-                            for(int i=0;i<30;i++)
-                            {
-                                for(int j=0;j<40;j++)
-                                {
-                                    mapaVisible[i][j]=niebla;
-                                }
-                            }
-                            firstIteration=1;
-                            piso++;
-                            switch(piso)
-                            {
-                                case 1:
-                                    player.x=1;
-                                    player.y=18;
-                                    break;
-                                case 2:
-                                    player.x=8;
-                                    player.y=1;
-                                    break;
-                                case 3:
-                                    player.x=1;
-                                    player.y=28;
-                                    break;
-                            }
-                            break;
-                        }
-
-                    mapas[piso][player.x][player.y + 1]=pasillo;
+                    eventroom();
+                    if(mapas[piso][player.x][player.y]==bosssss)
+                        break;
+                    mapas[piso][player.x][player.y+1]=pasillo;
                     mapas[piso][player.x][player.y]=pasillo;
                     mapaVisible[player.x][player.y]=64;
                 }
@@ -670,130 +547,10 @@ void Dungeons(){
                         player.x++;
                         throw 1;
                     }
-                    for(int i=0;i<3;i++)
-                    {
-                        for(int j=0;j<3;j++)
-                        {
-                            mapaVisible[player.x - 1 + j][player.y - 1 + i]=mapas[piso][player.x - 1 + j][player.y - 1 + i];
-                        }
-                    }
-                    if(mapas[piso][player.x][player.y]==itemmmm)
-                        rings();
-                    else if(mapas[piso][player.x][player.y]>=48 && mapas[piso][player.x][player.y]<=57)
-                    {
-                        switch(mapas[piso][player.x][player.y])
-                        {
-                            case '0':
-                                //PRIMER DIALOGO
-                                cout<<"A lo largo de estas dungeons, encontraras varios enemigos, items especiales, y notas que te contaran parte de la historia";
-                                Sleep(5000);
-                                break;
-                            case '1':
-                                 //SEGUNDO DIALOGO
-                                cout<<"No te dejes engañar por los varios caminos que encontras"
-                                    << " recuerda la importante recompensa que se encuentra al final de esta inmensa cueva"<<endl;
-                                Sleep(6000);
-                                break;
-                            case '2':
-                                //TERCER DIALOGO
-                                cout<<"A continuacion te encontraras con unos enemigo"
-                                    <<" Debes seleccionar el ataque y a quien deseas atacar"<<endl;
-                                Sleep(5500);
-                                break;
-                            case '3':
-                                //PRIMER MENSAJE, SEGUNDO NIVEL
-                                cout<<"Varios lo han intentado, pero ninguno lo ha conseguido"<<endl;
-                                Sleep(3000);
-                                cout<<" Todos vienen por el mismo artefacto, pero los guardianes se los han impedido"<<endl;
-                                Sleep(3000);
-                                break;
-                            case '4':
-                                //ANTES DEL PRIMER ENEMIGO DEL TERCER NIVEL
-                                cout<<"Aballister: 'A partir de ahora nuestros enemigos seran mas fuertes'"<<endl;
-                                Sleep(4000);
-                                cout<<"Karsus:'¿Tu como lo sabes?"<<endl;
-                                Sleep(3000);
-                                cout<<"Aballister: 'Me contaron por ahi...unos conocidos"<<endl;
-                                Sleep(3000);
-                                break;
-                            case '5':
-                                 //FINAL DEL PRIMER PASILLO QUE NO ES
-                                cout<<"Felicidades por su perseverancia, pero me temo que han tomado el camino equivocado"<<endl;
-                                cout<<"Como todos los que vinieron antes que ustedes"<<endl;
-                                Sleep(7000);
-                                break;
-                            case '6':
-                                //AL FINAL DEL PASILLO
-                                cout<<"Que ironia, parece ser que estan siguiendo los mismos pasos que aquellos que estan muertos"<<endl;
-                                cout<<"Y parece, que alguien los esta guiando"<<endl;
-                                Sleep(7000);
-                                break;
-                            case '7':
-                                //MENSAJE 1 DEL NIVEL 4, RUBEN DICE DONDE SE PONE
-                                cout<<"Puede que se esten volviendo locos, o que alguien, los quiere ver morir"<<endl;
-                                Sleep(4000);
-                                break;
-                            case '8':
-                                 //MENSAJE 2 DEL NIVEL 4
-                                cout<<"¿Realmente valdra la pena sacrificarlo todo, por obtener riqueza infinita?"<<endl;
-                                Sleep(4000);
-                                break;
-                            case '9':
-                                //MENSAJE 3 DEL NIVEL 4
-                                cout<<Hero.nombre<<" encuentra una carta que dice lo siguiente: "<<endl;
-                                Sleep(3000);
-                                cout<<"'Corre, alguien esta a punto de tra...'"<<endl;
-                                Sleep(3000);
-                                cout<<"Aballister toma la carta y la rompe y dice 'Hay que dejar de leer esas tonterias, solo nos hacen daño"<<endl;
-                                Sleep(3000);
-                                cout<<"Karsus : 'Creo que es mejor seguir, aunque yo mantendria mis ojos abiertos"<<endl;
-                                Sleep(3000);
-                                break;
-                        }
-                    }
-                    else if(mapas[piso][player.x][player.y]==enemigo)
-                    {
-                        if(battle())
-                                cout<<"Has ganado el combate, continua con tu aventura!"<<endl;
-                            else
-                            {
-                                clear_screen();
-                                cout<<"YOU DIED"<<endl;
-                                Sleep(1000);
-                                getch;
-                                exit(1);
-                            }
-                    }
-                    else if(mapas[piso][player.x][player.y]==bosssss)
-                        {
-                            for(int i=0;i<30;i++)
-                            {
-                                for(int j=0;j<40;j++)
-                                {
-                                    mapaVisible[i][j]=niebla;
-                                }
-                            }
-                            firstIteration=1;
-                            piso++;
-                            switch(piso)
-                            {
-                                case 1:
-                                    player.x=1;
-                                    player.y=18;
-                                    break;
-                                case 2:
-                                    player.x=8;
-                                    player.y=1;
-                                    break;
-                                case 3:
-                                    player.x=1;
-                                    player.y=28;
-                                    break;
-                            }
-                            break;
-                        }
-
-                    mapas[piso][player.x + 1][player.y]=pasillo;
+                    eventroom();
+                    if(mapas[piso][player.x][player.y]==bosssss)
+                        break;
+                    mapas[piso][player.x+1][player.y]=pasillo;
                     mapas[piso][player.x][player.y]=pasillo;
                     mapaVisible[player.x][player.y]=64;
                 }
@@ -814,131 +571,13 @@ void Dungeons(){
                         player.y--;
                         throw 1;
                     }
-                    for(int i=0;i<3;i++)
-                    {
-                        for(int j=0;j<3;j++)
-                        {
-                            mapaVisible[player.x - 1 + j][player.y - 1 + i]=mapas[piso][player.x - 1 + j][player.y - 1 + i];
-                        }
-                    }
-                    if(mapas[piso][player.x][player.y]==itemmmm)
-                        rings();
-                    else if(mapas[piso][player.x][player.y]>=48 && mapas[piso][player.x][player.y]<=57)
-                    {
-                        switch(mapas[piso][player.x][player.y])
-                        {
-                            case '0':
-                                //PRIMER DIALOGO
-                                cout<<"A lo largo de estas dungeons, encontraras varios enemigos, items especiales, y notas que te contaran parte de la historia";
-                                Sleep(5000);
-                                break;
-                            case '1':
-                                 //SEGUNDO DIALOGO
-                                cout<<"No te dejes engañar por los varios caminos que encontras"
-                                    << " recuerda la importante recompensa que se encuentra al final de esta inmensa cueva"<<endl;
-                                Sleep(6000);
-                                break;
-                            case '2':
-                                //TERCER DIALOGO
-                                cout<<"A continuacion te encontraras con unos enemigo"
-                                    <<" Debes seleccionar el ataque y a quien deseas atacar"<<endl;
-                                Sleep(5500);
-                                break;
-                            case '3':
-                                //PRIMER MENSAJE, SEGUNDO NIVEL
-                                cout<<"Varios lo han intentado, pero ninguno lo ha conseguido"<<endl;
-                                Sleep(3000);
-                                cout<<" Todos vienen por el mismo artefacto, pero los guardianes se los han impedido"<<endl;
-                                Sleep(3000);
-                                break;
-                            case '4':
-                                //ANTES DEL PRIMER ENEMIGO DEL TERCER NIVEL
-                                cout<<"Aballister: 'A partir de ahora nuestros enemigos seran mas fuertes'"<<endl;
-                                Sleep(4000);
-                                cout<<"Karsus:'¿Tu como lo sabes?"<<endl;
-                                Sleep(3000);
-                                cout<<"Aballister: 'Me contaron por ahi...unos conocidos"<<endl;
-                                Sleep(3000);
-                                break;
-                            case '5':
-                                 //FINAL DEL PRIMER PASILLO QUE NO ES
-                                cout<<"Felicidades por su perseverancia, pero me temo que han tomado el camino equivocado"<<endl;
-                                cout<<"Como todos los que vinieron antes que ustedes"<<endl;
-                                Sleep(7000);
-                                break;
-                            case '6':
-                                //AL FINAL DEL PASILLO
-                                cout<<"Que ironia, parece ser que estan siguiendo los mismos pasos que aquellos que estan muertos"<<endl;
-                                cout<<"Y parece, que alguien los esta guiando"<<endl;
-                                Sleep(7000);
-                                break;
-                            case '7':
-                                //MENSAJE 1 DEL NIVEL 4, RUBEN DICE DONDE SE PONE
-                                cout<<"Puede que se esten volviendo locos, o que alguien, los quiere ver morir"<<endl;
-                                Sleep(4000);
-                                break;
-                            case '8':
-                                 //MENSAJE 2 DEL NIVEL 4
-                                cout<<"¿Realmente valdra la pena sacrificarlo todo, por obtener riqueza infinita?"<<endl;
-                                Sleep(4000);
-                                break;
-                            case '9':
-                                //MENSAJE 3 DEL NIVEL 4
-                                cout<<Hero.nombre<<" encuentra una carta que dice lo siguiente: "<<endl;
-                                Sleep(3000);
-                                cout<<"'Corre, alguien esta a punto de tra...'"<<endl;
-                                Sleep(3000);
-                                cout<<"Aballister toma la carta y la rompe y dice 'Hay que dejar de leer esas tonterias, solo nos hacen daño"<<endl;
-                                Sleep(3000);
-                                cout<<"Karsus : 'Creo que es mejor seguir, aunque yo mantendria mis ojos abiertos"<<endl;
-                                Sleep(3000);
-                                break;
-                        }
-                    }
-                    else if(mapas[piso][player.x][player.y]==enemigo)
-                        {
-                            if(battle())
-                                cout<<"Has ganado el combate, continua con tu aventura!"<<endl;
-                            else
-                            {
-                                clear_screen();
-                                cout<<"YOU DIED"<<endl;
-                                Sleep(1000);
-                                exit(1);
-                            }
-                        }
-                    else if(mapas[piso][player.x][player.y]==bosssss)
-                        {
-                            for(int i=0;i<30;i++)
-                            {
-                                for(int j=0;j<40;j++)
-                                {
-                                    mapaVisible[i][j]=niebla;
-                                }
-                            }
-                            piso++;
-                            firstIteration=1;
-                            switch(piso)
-                            {
-                                case 1:
-                                    player.x=1;
-                                    player.y=18;
-                                    break;
-                                case 2:
-                                    player.x=8;
-                                    player.y=1;
-                                    break;
-                                case 3:
-                                    player.x=1;
-                                    player.y=28;
-                                    break;
-                            }
-                            break;
-                        }
-
-                    mapas[piso][player.x][player.y - 1]=pasillo;
+                    eventroom();
+                    if(mapas[piso][player.x][player.y]==bosssss)
+                        break;
+                    mapas[piso][player.x][player.y-1]=pasillo;
                     mapas[piso][player.x][player.y]=pasillo;
                     mapaVisible[player.x][player.y]=64;
+
                 }
                 catch(int e)
                 {
@@ -957,131 +596,10 @@ void Dungeons(){
                         player.x--;
                         throw 1;
                     }
-                    for(int i=0;i<3;i++)
-                    {
-                        for(int j=0;j<3;j++)
-                        {
-                            mapaVisible[player.x - 1 + j][player.y - 1 + i]=mapas[piso][player.x - 1 + j][player.y - 1 + i];
-                        }
-                    }
-
-                    if(mapas[piso][player.x][player.y]==itemmmm)
-                        rings();
-                    else if(mapas[piso][player.x][player.y]>=48 && mapas[piso][player.x][player.y]<=57)
-                    {
-                        switch(mapas[piso][player.x][player.y])
-                        {
-                            case '0':
-                                //PRIMER DIALOGO
-                                cout<<"A lo largo de estas dungeons, encontraras varios enemigos, items especiales, y notas que te contaran parte de la historia";
-                                Sleep(5000);
-                                break;
-                            case '1':
-                                 //SEGUNDO DIALOGO
-                                cout<<"No te dejes engañar por los varios caminos que encontras"
-                                    << " recuerda la importante recompensa que se encuentra al final de esta inmensa cueva"<<endl;
-                                Sleep(6000);
-                                break;
-                            case '2':
-                                //TERCER DIALOGO
-                                cout<<"A continuacion te encontraras con unos enemigo"
-                                    <<" Debes seleccionar el ataque y a quien deseas atacar"<<endl;
-                                Sleep(5500);
-                                break;
-                            case '3':
-                                //PRIMER MENSAJE, SEGUNDO NIVEL
-                                cout<<"Varios lo han intentado, pero ninguno lo ha conseguido"<<endl;
-                                Sleep(3000);
-                                cout<<" Todos vienen por el mismo artefacto, pero los guardianes se los han impedido"<<endl;
-                                Sleep(3000);
-                                break;
-                            case '4':
-                                //ANTES DEL PRIMER ENEMIGO DEL TERCER NIVEL
-                                cout<<"Aballister: 'A partir de ahora nuestros enemigos seran mas fuertes'"<<endl;
-                                Sleep(4000);
-                                cout<<"Karsus:'¿Tu como lo sabes?"<<endl;
-                                Sleep(3000);
-                                cout<<"Aballister: 'Me contaron por ahi...unos conocidos"<<endl;
-                                Sleep(3000);
-                                break;
-                            case '5':
-                                 //FINAL DEL PRIMER PASILLO QUE NO ES
-                                cout<<"Felicidades por su perseverancia, pero me temo que han tomado el camino equivocado"<<endl;
-                                cout<<"Como todos los que vinieron antes que ustedes"<<endl;
-                                Sleep(7000);
-                                break;
-                            case '6':
-                                //AL FINAL DEL PASILLO
-                                cout<<"Que ironia, parece ser que estan siguiendo los mismos pasos que aquellos que estan muertos"<<endl;
-                                cout<<"Y parece, que alguien los esta guiando"<<endl;
-                                Sleep(7000);
-                                break;
-                            case '7':
-                                //MENSAJE 1 DEL NIVEL 4, RUBEN DICE DONDE SE PONE
-                                cout<<"Puede que se esten volviendo locos, o que alguien, los quiere ver morir"<<endl;
-                                Sleep(4000);
-                                break;
-                            case '8':
-                                 //MENSAJE 2 DEL NIVEL 4
-                                cout<<"¿Realmente valdra la pena sacrificarlo todo, por obtener riqueza infinita?"<<endl;
-                                Sleep(4000);
-                                break;
-                            case '9':
-                                //MENSAJE 3 DEL NIVEL 4
-                                cout<<Hero.nombre<<" encuentra una carta que dice lo siguiente: "<<endl;
-                                Sleep(3000);
-                                cout<<"'Corre, alguien esta a punto de tra...'"<<endl;
-                                Sleep(3000);
-                                cout<<"Aballister toma la carta y la rompe y dice 'Hay que dejar de leer esas tonterias, solo nos hacen daño"<<endl;
-                                Sleep(3000);
-                                cout<<"Karsus : 'Creo que es mejor seguir, aunque yo mantendria mis ojos abiertos"<<endl;
-                                Sleep(3000);
-                                break;
-                        }
-                    }
-                    else if(mapas[piso][player.x][player.y]==enemigo)
-                    {
-                        if(battle())
-                                cout<<"Has ganado el combate, continua con tu aventura!"<<endl;
-                            else
-                            {
-                                clear_screen();
-                                cout<<"YOU DIED"<<endl;
-                                Sleep(1000);
-                                getch;
-                                exit(1);
-                            }
-                    }
-                    else if(mapas[piso][player.x][player.y]==bosssss)
-                        {
-                            for(int i=0;i<30;i++)
-                            {
-                                for(int j=0;j<40;j++)
-                                {
-                                    mapaVisible[i][j]=niebla;
-                                }
-                            }
-                            piso++;
-                            firstIteration=1;
-                            switch(piso)
-                            {
-                                case 1:
-                                    player.x=1;
-                                    player.y=18;
-                                    break;
-                                case 2:
-                                    player.x=8;
-                                    player.y=1;
-                                    break;
-                                case 3:
-                                    player.x=1;
-                                    player.y=28;
-                                    break;
-                            }
-                            break;
-                        }
-
-                    mapas[piso][player.x - 1][player.y]=pasillo;
+                    eventroom();
+                    if(mapas[piso][player.x][player.y]==bosssss)
+                        break;
+                    mapas[piso][player.x-1][player.y]=pasillo;
                     mapas[piso][player.x][player.y]=pasillo;
                     mapaVisible[player.x][player.y]=64;
                 }
@@ -2349,4 +1867,129 @@ int player_sorter(stats a, stats b){
         return 1;
     else
         return 0;
+}
+void eventroom()
+{
+ for(int i=0;i<3;i++)
+    {
+        for(int j=0;j<3;j++)
+        {
+            mapaVisible[player.x-1+j][player.y-1+i]=mapas[piso][player.x-1+j][player.y-1+i];
+        }
+    }
+    if(mapas[piso][player.x][player.y]==itemmmm)
+        rings();
+    else if(mapas[piso][player.x][player.y]>=48 && mapas[piso][player.x][player.y]<=57)
+    {
+        switch(mapas[piso][player.x][player.y])
+        {
+            case '0':
+                //PRIMER DIALOGO
+                cout<<"A lo largo de estas dungeons, encontraras varios enemigos, items especiales, y notas que te contaran parte de la historia";
+                Sleep(5000);
+                break;
+            case '1':
+                 //SEGUNDO DIALOGO
+                cout<<"No te dejes engañar por los varios caminos que encontras"
+                    << " recuerda la importante recompensa que se encuentra al final de esta inmensa cueva"<<endl;
+                Sleep(6000);
+                break;
+            case '2':
+                //TERCER DIALOGO
+                cout<<"A continuacion te encontraras con unos enemigo"
+                    <<" Debes seleccionar el ataque y a quien deseas atacar"<<endl;
+                Sleep(5500);
+                break;
+            case '3':
+                //PRIMER MENSAJE, SEGUNDO NIVEL
+                cout<<"Varios lo han intentado, pero ninguno lo ha conseguido"<<endl;
+                Sleep(3000);
+                cout<<" Todos vienen por el mismo artefacto, pero los guardianes se los han impedido"<<endl;
+                Sleep(3000);
+                break;
+            case '4':
+                //ANTES DEL PRIMER ENEMIGO DEL TERCER NIVEL
+                cout<<"Aballister: 'A partir de ahora nuestros enemigos seran mas fuertes'"<<endl;
+                Sleep(4000);
+                cout<<"Karsus:'¿Tu como lo sabes?"<<endl;
+                Sleep(3000);
+                cout<<"Aballister: 'Me contaron por ahi...unos conocidos"<<endl;
+                Sleep(3000);
+                break;
+            case '5':
+                 //FINAL DEL PRIMER PASILLO QUE NO ES
+                cout<<"Felicidades por su perseverancia, pero me temo que han tomado el camino equivocado"<<endl;
+                cout<<"Como todos los que vinieron antes que ustedes"<<endl;
+                Sleep(7000);
+                break;
+            case '6':
+                //AL FINAL DEL PASILLO
+                cout<<"Que ironia, parece ser que estan siguiendo los mismos pasos que aquellos que estan muertos"<<endl;
+                cout<<"Y parece, que alguien los esta guiando"<<endl;
+                Sleep(7000);
+                break;
+            case '7':
+                //MENSAJE 1 DEL NIVEL 4, RUBEN DICE DONDE SE PONE
+                cout<<"Puede que se esten volviendo locos, o que alguien, los quiere ver morir"<<endl;
+                Sleep(4000);
+                break;
+            case '8':
+                 //MENSAJE 2 DEL NIVEL 4
+                cout<<"¿Realmente valdra la pena sacrificarlo todo, por obtener riqueza infinita?"<<endl;
+                Sleep(4000);
+                break;
+            case '9':
+                //MENSAJE 3 DEL NIVEL 4
+                cout<<Hero.nombre<<" encuentra una carta que dice lo siguiente: "<<endl;
+                Sleep(3000);
+                cout<<"'Corre, alguien esta a punto de tra...'"<<endl;
+                Sleep(3000);
+                cout<<"Aballister toma la carta y la rompe y dice 'Hay que dejar de leer esas tonterias, solo nos hacen daño"<<endl;
+                Sleep(3000);
+                cout<<"Karsus : 'Creo que es mejor seguir, aunque yo mantendria mis ojos abiertos"<<endl;
+                Sleep(3000);
+                break;
+        }
+    }
+    else if(mapas[piso][player.x][player.y]==enemigo)
+        {
+            if(battle())
+                cout<<"Has ganado el combate, continua con tu aventura!"<<endl;
+            else
+            {
+                clear_screen();
+                cout<<"YOU DIED"<<endl;
+                Sleep(1000);
+                getch;
+                exit(1);
+            }
+
+        }
+    else if(mapas[piso][player.x][player.y]==bosssss)
+        {
+            for(int i=0;i<30;i++)
+            {
+                for(int j=0;j<30;j++)
+                {
+                    mapaVisible[i][j]=niebla;
+                }
+            }
+            firstIteration=1;
+            piso++;
+            switch(piso)
+            {
+                case 1:
+                    player.x=1;
+                    player.y=18;
+                    break;
+                case 2:
+                    player.x=8;
+                    player.y=1;
+                    break;
+                case 3:
+                    player.x=1;
+                    player.y=28;
+                    break;
+            }
+        }
 }
