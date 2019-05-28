@@ -1620,7 +1620,7 @@ void battacks(stats * member_b,int mem_num,int turn,int& enemies,int& heros){
                 	cout<<i<<" ";
         	}
         	catch(const bool nub){
-            	cout<<"No te puedes atacar a ti mismo\n";
+            	cout<<"No te puedes  elegir a ti mismo\n";
         	}
         	catch(const char deadmsg){
             	cout<<"Ese personaje esta muerto";
