@@ -655,7 +655,7 @@ void Dungeons(){
                         throw 1;
                     }
                     eventroom();
-                    if(!mapas[piso][player.x][player.y]==bosssss)
+                    if(!(mapas[piso][player.x][player.y]==bosssss))
                     {
                         mapas[piso][player.x][player.y+1]=pasillo;
                         mapas[piso][player.x][player.y]=pasillo;
@@ -680,7 +680,7 @@ void Dungeons(){
                         throw 1;
                     }
                     eventroom();
-                    if(!mapas[piso][player.x][player.y]==bosssss)
+                    if(!(mapas[piso][player.x][player.y]==bosssss))
                     {
                         mapas[piso][player.x+1][player.y]=pasillo;
                         mapas[piso][player.x][player.y]=pasillo;
@@ -705,7 +705,7 @@ void Dungeons(){
                         throw 1;
                     }
                     eventroom();
-                    if(!mapas[piso][player.x][player.y]==bosssss)
+                    if(!(mapas[piso][player.x][player.y]==bosssss))
                     {
                         mapas[piso][player.x][player.y-1]=pasillo;
                         mapas[piso][player.x][player.y]=pasillo;
@@ -731,7 +731,7 @@ void Dungeons(){
                         throw 1;
                     }
                     eventroom();
-                    if(!mapas[piso][player.x][player.y]==bosssss)
+                    if(!(mapas[piso][player.x][player.y]==bosssss))
                     {
                         mapas[piso][player.x-1][player.y]=pasillo;
                         mapas[piso][player.x][player.y]=pasillo;
