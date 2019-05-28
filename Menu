@@ -318,8 +318,8 @@ int main()
         Sleep(3000);
         cout<<"FIN";
         Sleep(5000);
-        return 0;
     }
+    return 0;
 }
 
 /** Definicion de Funciones **/
