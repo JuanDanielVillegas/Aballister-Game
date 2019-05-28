@@ -23,6 +23,7 @@
 #include <string> //stoi
 #include <algorithm> //sort
 #include <time.h> //time
+#include <assert.h> //assert
 
 using namespace std;
 
@@ -1901,6 +1902,8 @@ void level_opening(){
 	clear_screen();
 	cout<<" 	Ahora dime aventurero, ¿cuál es tu nombre?\n\n	";
 	cin>>Hero.nombre;
+	assert(Hero.nombre!="Wong");
+	assert(Hero.nombre!="wong");
 	cout<<"	Perfecto "<<Hero.nombre<<endl;
 	getch();
 	clear_screen();
