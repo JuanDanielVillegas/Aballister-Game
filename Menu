@@ -32,6 +32,7 @@ const short unsigned int Keyleft = 37; //left
 const short unsigned int Keytop = 38; //up
 const short unsigned int Keyright = 39; //right
 const short unsigned int Keydown = 40; //down
+int finalselection=0; /** Valor de decision final **/
 int piso = 0; /** El piso en el que se encuentra **/
 bool gameOn= true; /**Es un booleano que tiene valor verdadero mientras el juego se siga ejecutando**/
 int index2, index3; /**Posicion del menú que se imprime**/
@@ -286,6 +287,29 @@ int main()
         t1.join();
     }
     t1.join();
+    cout<<"Al acabarse la batalla nuestro héroe voltea a su alrededor Karsus y Aballister muerto"<<endl;
+    Sleep(3000);
+    cout<<"Tiene en su poder el objeto, que brilla incandescentemente"
+        <<"Ese objeto que tanto trabajo le había costado por fin está en sus manos"
+        <<"ahora tiene la opción de destruirlo o de convertirse en lo que acababa de destruir"<<endl;
+    Sleep(10000);
+    cout<<"Ahora tienes la opcion de destruir el objeto o usarlo a tu favor"<<endl;
+    Sleep(3000);
+    cin>>finalselection;
+    if(finalselection==1){
+    cout<<"Nuestro héroe, ha eliminado el objeto más peligroso de la faz de la tierra… o al menos eso cree"<<endl;
+        <<"Todo lo que queda es continuar y buscar una manera de regresar a la civilización"<<endl;
+        Sleep(10000);
+            }
+            if else(finalselection==2){
+                cout<<"Nuestro heroe ahora es horrible, por el momento, ahora es momento de tomar el control del planeta"<<endl;
+                cout<<"VIDA +10000000"<<endl
+                cout<<"MAGIA +10000"<<endl
+                cout<<" DEFENSA+1000000"<<endl
+                cout<<" ATAQUE+100000"<<endl
+                cout<<"VELOCIDAD+10000"<<endl;
+                Sleep(10000);
+		}
     cout<<"Haz demostrado tu valentía como un guerrero excepcional"<<endl;
     Sleep(3000);
     cout<<"Por lo que damos las gracias por derrotar a Aballister Maligno"<<endl;
@@ -591,10 +615,10 @@ void Dungeons(){
 
 	while (true)
 	{
-        /** Vista del jugador a traves de la niebla en su alrededor cuando empieza **/
-        if(firstIteration)
 	if(piso=4)
             break;
+        /** Vista del jugador a traves de la niebla en su alrededor cuando empieza **/
+        if(firstIteration)
         {
             firstIteration=0; /** quita la primera iteracion **/
 
