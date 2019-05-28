@@ -63,7 +63,6 @@ void Dungeons();
 void room_move(int&, int&);
 void plv1_map();
 bool isValidInt(string numeroEnCadena);
-bool combatstats(int);
 void pattacks(struct stats*,int,int,int&,int&);
 void gattacks(struct stats*,int,int,int&,int&);
 void rattacks(struct stats*,int,int,int&,int&);
