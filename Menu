@@ -291,9 +291,27 @@ int main()
 
 /** Definicion de Funciones **/
 
+/**
+ *  Función: informacion
+ *
+ *  @Descripcion: Función que muestra la información general del juego, así como 
+ *		  sus reglas y especificaciónes, también cuenta con un switch para poder regresar al menú o cerrar el programa
+ *  @Parametros: No recibe parametros
+ *  @Retorna: Nada debido a que es una función void
+ *
+ **/
+
 void informacion(){
     string auxiliarInf;
-    cout << " Mas opciones por implementar =)" << endl;
+    cout << " Puntos importantes:" << endl;
+    cout << " -El mago puede atacar a más de un oponente" << endl;
+    cout << " -Te mueves usando las flechas del teclado" << endl;
+    cout << " -Todas tus opciones deberán ser ingresadas desde el teclado" << endl;
+    cout << " -Lee atentamente las instrucciones y trata de ingresar la opción correcta como se indica" << endl;
+    cout << " -Si mueren todos los \"Heroes\" "<< endl;
+    cout << " Diviertete :)" << endl<<endl;
+    cout << " Creado por SiempreAmix"<<(char)169<< endl<<endl;
+
     cout << " 1. Regresar al menu" << endl;
     cout << " 0. Salir del juego" << endl;
     bool valido=true;
@@ -329,6 +347,16 @@ void informacion(){
         }
     } while(valido!=true);
 }
+
+/**
+ *  Función: menu
+ *
+ *  @Descripcion: Función que despliega el titulo del juego, así como el menú principal con texto movible
+ *  @Parametros: No recibe parametros
+ *  @Retorna: Nada debido a que es una función void
+ *
+ **/
+
 void menu(){
     string userChoice;
     bool Valido=false;
@@ -371,6 +399,16 @@ void menu(){
         }
     }
 }
+
+/**
+ *  Función: display
+ *
+ *  @Descripcion: Función que despliega el texto movible en el menú principal usando una serie de sentencias for y un clear_screan
+ *  @Parametros: No recibe parametros
+ *  @Retorna: Nada debido a que es una función void
+ *
+ **/
+
 void display(){
     string S1= "----------------------- ROUNDABOUT: ABALLISTER'S CURSE -----------------------";
     string S2= "==============================================================================";
@@ -417,6 +455,16 @@ void display(){
             clear_screen();
         }
 }
+
+/**
+ *  Función: isValidInt
+ *
+ *  @Descripcion: Función que verifica si el numero ingresado es un entero
+ *  @Parametros: Recibe una string llamada numeroEnCadena
+ *  @Retorna: Regresa un booleano dependiendo si (Falso) Si no es valido o (Verdadero) si lo es
+ *
+ **/
+
 bool isValidInt(string numeroEnCadena){
 	int inicio = 0;
 	int i=0;
@@ -434,12 +482,31 @@ bool isValidInt(string numeroEnCadena){
 
 	return valido;
 }
+
+/**
+ *  Función: isValidInt			(Sobrecarga de funciones)
+ *
+ *  @Descripcion: Función que revisa si un numero está dentro de un intervalo
+ *  @Parametros: Recibe el numero a comprar, el limite mayor y el menor
+ *  @Retorna: Regresa un booleano dependiendo si se encuentra dentro del rango o no
+ *
+ **/
+
 bool isValidInt(int numero, int lim_mayor , int lim_menor){
     bool valido= true;
     if (numero> lim_mayor || numero< lim_menor)
         valido=false;
     return valido;
 }
+
+/**  Función: clear_screen
+ *
+ *  @Descripcion: Función que limpia la consola
+ *  @Parametros: No recibe parametros
+ *  @Retorna: Nada debido a que es una función void
+ *
+ **/
+
 void clear_screen(){
   DWORD n;                         /* Number of characters written */
   DWORD size_1;                      /* number of visible characters */
@@ -462,6 +529,16 @@ void clear_screen(){
   /* Reset the cursor to the top left position */
   SetConsoleCursorPosition ( h, coord );
 }
+
+/**
+ *  Función: timeThread
+ *
+ *  @Descripcion: Función que crea un cronometro para ver la duración del juego
+ *  @Parametros: No recibe parametros
+ *  @Retorna: Nada debido a que es una función void
+ *
+ **/
+
 void timerThread(){
     int seg=0, minutos=0, horas=0;
     while(gameOn==true)
@@ -481,6 +558,16 @@ void timerThread(){
     }
     cout<<"  La partida duro " << horas<<":"<<minutos<<":"<<seg<<endl;
 }
+
+/**
+ *  Función: Dungeons
+ *
+ *  @Descripcion: Función destinada a la creación y jugabilidad del mapa
+ *  @Parametros: No recibe parametros
+ *  @Retorna: Nada debido a que es una función void
+ *
+ **/
+
 void Dungeons(){
 
     /** i es la coordenada y de la impresion de pantalla, j  es la coordenada x de la impresion de pantalla
@@ -622,6 +709,16 @@ void Dungeons(){
     }
 	system("pause");
 }
+
+/**
+ *  Función: getKey
+ *
+ *  @Descripcion: Recibe que ingrese en el teclado en tiempo real
+ *  @Parametros: No recibe parametros
+ *  @Retorna: Regresa un entero dependiendo el valor númerico del teclado
+ *
+ **/
+
 int getKey(){
     while (true)
     {
@@ -634,6 +731,16 @@ int getKey(){
         }
     }
 }
+
+/**
+ *  Función: cstats
+ *
+ *  @Descripcion: Función que copia los stats de los personajes a un arreglo
+ *  @Parametros: Un apuntador a un arreglo de tipo stats, cuantos enemigos hay en total (enemies), la cantidad de enemigos de cada tipo (t1, t2, etc.) al igual que los boses (b1, b2, etc)
+ *  @Retorna: Nada debido a que es una función void
+ *
+ **/
+
 void cstats(stats* members, int enemies, int t1, int t2, int t3, int t4, int t5, int b1, int b2, int b3, int b4){
     members[0].nombre = Hero.nombre;
     members[0].ataque = Hero.ataque;
@@ -806,6 +913,16 @@ void cstats(stats* members, int enemies, int t1, int t2, int t3, int t4, int t5,
         }
     }
 }
+
+/**
+ *  Función: battle
+ *
+ *  @Descripcion: Función que se encarga de hacer la batalla y la cantidad de enemigos que habrá
+ *  @Parametros: No recibe parametros
+ *  @Retorna: Regresa un booleano dependiendo si (1)ganaste o (0)perdiste
+ *
+ **/
+
 bool battle(){
     int yeet,members,heros=0,width=30,enemies=0,type1=0,type2=0,type3=0,type4=0,type5=0,boss1=0,boss2=0,boss3=0,boss4=0;
     bool inbtl=true;
@@ -869,6 +986,16 @@ bool battle(){
     	return false;
 
 }
+
+/**
+ *  Función: rings
+ *
+ *  @Descripcion: Función que brinda un anillo aleatorio a uno de los 3 heroes de forma aleatoria y aumenta +3 uno de los stats
+ *  @Parametros: No recibe parametros
+ *  @Retorna: Nada debido a que es una función void
+ *
+ **/
+
 void rings(){
     int item = 0, whomst = 0;
     srand(time(NULL));
@@ -965,6 +1092,15 @@ void rings(){
     }
     Sleep(2000);
 }
+
+/**
+ *  Función: pattacks
+ *
+ *  @Descripcion: Función del ataque de la clase Priest
+ *  @Parametros: Recibe un arreglo de la estructuca stats, la cantidad de miembros en total, el turno, cuantos enemigos y amigos quedan
+ *  @Retorna: Nada debido a que es una función void
+ *
+ **/
 void pattacks(stats* member_b, int mem_num, int turn, int& enemies, int& heros){
     clear_screen();
     if (member_b[turn].vivo)
@@ -1073,6 +1209,16 @@ void pattacks(stats* member_b, int mem_num, int turn, int& enemies, int& heros){
         getch();
     }
 }
+
+/**
+ *  Función: rattacks
+ *
+ *  @Descripcion: Función del ataque de la clase Rogue
+ *  @Parametros: Recibe un arreglo de la estructuca stats, la cantidad de miembros en total, el turno, cuantos enemigos y amigos quedan
+ *  @Retorna: Nada debido a que es una función void
+ *
+ **/
+
 void rattacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
     clear_screen();
     if (member_b[turn].vivo)
@@ -1185,6 +1331,16 @@ void rattacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
         getch();
     }
 }
+
+/**
+ *  Función: gattacks
+ *
+ *  @Descripcion: Función del ataque de la clase Gladiator
+ *  @Parametros: Recibe un arreglo de la estructuca stats, la cantidad de miembros en total, el turno, cuantos enemigos y amigos quedan
+ *  @Retorna: Nada debido a que es una función void
+ *
+ **/
+
 void gattacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
     clear_screen();
     if (member_b[turn].vivo)
@@ -1305,6 +1461,16 @@ void gattacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
         getch();
     }
 }
+
+/**
+ *  Función: battacks
+ *
+ *  @Descripcion: Función del ataque de la clase Bard
+ *  @Parametros: Recibe un arreglo de la estructuca stats, la cantidad de miembros en total, el turno, cuantos enemigos y amigos quedan
+ *  @Retorna: Nada debido a que es una función void
+ *
+ **/
+
 void battacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
     clear_screen();
     if (member_b[turn].vivo)
@@ -1418,6 +1584,16 @@ void battacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
         getch();
     }
 }
+
+/**
+ *  Función: mattacks
+ *
+ *  @Descripcion: Función del ataque de la clase Spellcaster
+ *  @Parametros: Recibe un arreglo de la estructuca stats, la cantidad de miembros en total, el turno, cuantos enemigos y amigos quedan
+ *  @Retorna: Nada debido a que es una función void
+ *
+ **/
+
 void mattacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
     clear_screen();
     if (member_b[turn].vivo)
@@ -1615,6 +1791,16 @@ void mattacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
         getch();
     }
 }
+
+/**
+ *  Función: eattacks
+ *
+ *  @Descripcion: Función del ataque de los enemigos
+ *  @Parametros: Recibe un arreglo de la estructuca stats, la cantidad de miembros en total, el turno, cuantos enemigos y amigos quedan
+ *  @Retorna: Nada debido a que es una función void
+ *
+ **/
+
 void eattacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
     if (member_b[turn].vivo)
     {
@@ -1656,6 +1842,16 @@ void eattacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
         getch();
     }
 }
+
+/**
+ *  Función: level_opening
+ *
+ *  @Descripcion: Función con toda la historia y la selección de clases, así como la entrada del nombre del usuario
+ *  @Parametros: No recibe parametros
+ *  @Retorna: Nada debido a que es una función void
+ *
+ **/
+
 void level_opening(){
     setlocale(LC_ALL, "");
     int i = 0;
@@ -1727,6 +1923,15 @@ void level_opening(){
     cout << "INICIA LA AVENTURA" << endl;
     setlocale(LC_ALL, "C");
 }
+
+/**  Función: clase
+ *
+ *  @Descripcion: Función se despliega el menú para la selección de la clase y se compureba si la elección es valida sin repeticiones
+ *  @Parametros: Apuntadores por dirección de cada uno de los personajes
+ *  @Retorna: Nada debido a que es una función void
+ *
+ **/
+
 void clase(stats &Hero,stats & Aballister,stats & Karsus){
     cout << setw(15) << " Clase" << setw(15) << "Ataque" << setw(15) << "Defensa" << setw(15) << "Vida" << setw(15) << "Magia" << setw(15) << "Velocidad" << setw(8) << "Tecla" << endl;
     cout << setw(15) << " Gladiator" << setw(15) << "20" << setw(15) << "10" << setw(15) << "70" << setw(15) << "5" << setw(15) << "20" << setw(8) << "1" << endl;
@@ -1802,6 +2007,16 @@ void clase(stats &Hero,stats & Aballister,stats & Karsus){
     seleccionClase(Karsus);
     cout << endl;
 }
+
+/**
+ *  Función: seleccionClase
+ *
+ *  @Descripcion: Función en la que se mandan las clases eleccionadas y se escogen por un switch y su respectivo case
+ *  @Parametros: Apuntadores por dirección del personaje
+ *  @Retorna: Nada debido a que es una función void
+ *
+ **/
+
 void seleccionClase(stats&Hero){
     int op = stoi(Hero.seleccion);
     switch (op)
@@ -1855,12 +2070,32 @@ void seleccionClase(stats&Hero){
             cout << "Escoge un numero valido" << endl;
     }
 }
+
+/**
+ *  Función: player_sorter
+ *
+ *  @Descripcion: Función en la acomodan a los personajes dependiendo su velocidad
+ *  @Parametros: Recibe las stats a y b que sirven para poder comparar ambas y ver cual es la mayor y menor
+ *  @Retorna: Un entero dependiendo si es mayor o menor
+ *
+ **/
+
 int player_sorter(stats a, stats b){
     if (a.velocidad < b.velocidad)
         return 1;
     else
         return 0;
 }
+
+/**
+ *  Función: eventRoom
+ *
+ *  @Descripcion: Función que sirve para encontrar algún evento en el mapa, ya sea item, enemigo, etc.
+ *  @Parametros: No recibe parametros
+ *  @Retorna: Nada debido a que es una función void
+ *
+ **/
+
 void eventroom()
 {
  for(int i=0;i<3;i++)
@@ -1996,6 +2231,16 @@ void eventroom()
             }
         }
 }
+
+/**
+ *  Función: bossBattle
+ *
+ *  @Descripcion: Función que sirve para implementar la batalla contra cada jefe de nivel
+ *  @Parametros: No recibe parametros
+ *  @Retorna: Regresa un verdadero o falso dependiendo si ganas o pierdes la batalla
+ *
+ **/
+
 bool BossBattle(){
     int members,heros=0,width=30,enemies=0,type1=0,type2=0,type3=0,type4=0,type5=0,boss1=0,boss2=0,boss3=0,boss4=0;
     bool inbtl=true;
