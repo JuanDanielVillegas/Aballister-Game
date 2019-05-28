@@ -1106,25 +1106,25 @@ bool battle(){
     case 0:
         type2++;
         yeet--;
-        for(int i=0;i<yeet;i++)
+        for(yeet;yeet>0;yeet--)
             type1++;
             break;
     case 1:
         type3++;
         yeet--;
-        for(int i=0;i<yeet;i++)
+        for(yeet;yeet>0;yeet--)
             type1++;
             break;
     case 2:
         type4++;
         yeet--;
-        for(int i=0;i<yeet;i++)
+        for(yeet;yeet>0;yeet--)
             type1++;
             break;
     case 3:
         type5++;
         yeet--;
-        for(int i=0;i<yeet;i++)
+        for(yeet;yeet>0;yeet--)
             type2++;
             break;
     }
@@ -1135,7 +1135,7 @@ bool battle(){
     	heros++;
 	if(Karsus.vivo)
     	heros++;
-    sort(member_b,member_b+6,player_sorter);
+    sort(member_b,member_b+members,player_sorter);
 	for(int i=0;i<members;i++){
         	cout<<member_b[i].nombre<<setw(width-member_b[i].nombre.size())
         	<<"Vida: "<<member_b[i].vida<<"/"<<member_b[i].mvida<<endl;
