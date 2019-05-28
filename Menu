@@ -8,6 +8,7 @@
 #include<locale.h>
 #include<iomanip>
 #include<wchar.h>
+#include<thread>
 
 using namespace std;
 
@@ -16,13 +17,18 @@ void moveText();
 void informacion();
 void display();
 bool isValidInt(string numeroEnCadena);
+bool isValidInt(int numero, int lim_mayor , int lim_menor);
 void clear_screen();
+void timerThread();
 
 int index1 , index2, index3, counter1, counter2, counter3, textT=1, size, speed;
+bool gameOn= true;
 
 int main()
 {
+    thread t1(timerThread);
     menu();
+    t1.join(); ///Este al final, donde termina el juego igualar gameOn= false
     return 0;
 }
 
@@ -35,26 +41,42 @@ void moveText(){
 }
 
 void informacion(){
-    int auxiliarInf=0;
-    cout << "Aqui aparecera la informacion" << endl;
-    cout << "Ingrese un 1 para regresar al menu" << endl;
-    cout << "Ingrese un 0 para cerrar el juego" << endl;
-    cin>>auxiliarInf;
-    clear_screen();
-    ///Copiar try-catch de menu alv
-    switch(auxiliarInf){
-        case 1:
-            clear_screen();
-            menu();
-            break;
-        case 0:
-            cout<< "Programa cerrado";
-            break;
-        default:
-            clear_screen();
-                cout << "Error: Undefind choice." << endl;
-                break;
-    }
+    string auxiliarInf;
+    cout << " Mas opciones por implementar =)" << endl;
+    cout << " 1. Regresar al menu" << endl;
+    cout << " 0. Salir del juego" << endl;
+    bool valido=true;
+    do{
+        cin>>auxiliarInf;
+        clear_screen();
+        try{
+            if(isValidInt(auxiliarInf)==true){
+                int choice= stoi(auxiliarInf);
+                if(isValidInt(choice, 1, 0)){
+                    switch(choice){
+                        case 1:
+                            clear_screen();
+                            menu();
+                            break;
+                        case 0:
+                            cout<< "  Programa cerrado";
+                            gameOn=false;
+                            break;
+                    }
+                }
+                else{
+                    throw "  Opcion no valida\n";
+                }
+            }
+            else{
+                throw "  Opcion no valida\n";
+            }
+        }
+        catch(const char* msg){
+            cout<< msg;
+            valido= false;
+        }
+    } while(valido!=true);
 }
 void menu(){
     string userChoice;
@@ -67,25 +89,30 @@ void menu(){
         try{
             if(isValidInt(userChoice)==true){
                 int choice= stoi(userChoice);
-                if(choice==1){
-                    Valido=true;
-                    cout<< "Por implementar";
-                }
-                else if(choice==2){
-                    Valido=true;
-                    clear_screen();
-                    informacion();
-                }
-                else if(choice==3){
-                    Valido=true;
-                    clear_screen();;
-                    cout << "Programa cerrado" << endl;
+                if(isValidInt(choice , 3 , 1)){
+                    switch(choice){
+                        case 1:
+                            Valido=true;
+                            cout<< "  Por implementar";
+                            break;
+                        case 2:
+                            Valido=true;
+                            clear_screen();
+                            informacion();
+                            break;
+                        case 3:
+                            Valido=true;
+                            clear_screen();;
+                            cout << "  Programa cerrado" << endl;
+                            gameOn=false;
+                            break;
+                    }
                 }
                 else{
-                    throw "Opcion no valida\n";
+                    throw "  Opcion no valida\n";
                 }
             } else{
-                throw "Opcion no valida\n";
+                throw "  Opcion no valida\n";
             }
         }
         catch(const char* msg){
@@ -161,6 +188,13 @@ bool isValidInt(string numeroEnCadena){
 	return valido;
 }
 
+bool isValidInt(int numero, int lim_mayor , int lim_menor){
+    bool valido= true;
+    if (numero> lim_mayor || numero< lim_menor)
+        valido=false;
+    return valido;
+}
+
 void clear_screen(){
   DWORD n;                         /* Number of characters written */
   DWORD size;                      /* number of visible characters */
@@ -183,3 +217,24 @@ void clear_screen(){
   /* Reset the cursor to the top left position */
   SetConsoleCursorPosition ( h, coord );
 }
+
+void timerThread(){
+    int seg=0, minutos=0, horas=0;
+    while(gameOn==true)
+    {
+        if(seg>=60)
+        {
+            seg=0;
+            minutos++;
+            if(minutos>=60)
+            {
+                minutos=0;
+                horas++;
+            }
+        }
+    Sleep(1000);
+    seg++;
+    }
+    cout<<"  La partida duro " << horas<<":"<<minutos<<":"<<seg<<endl;
+}
+
