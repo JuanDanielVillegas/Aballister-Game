@@ -309,11 +309,11 @@ void informacion(){
     cout << " -Te mueves usando las flechas del teclado" << endl;
     cout << " -Todas tus opciones deberán ser ingresadas desde el teclado" << endl;
     cout << " -Lee atentamente las instrucciones y trata de ingresar la opción correcta como se indica" << endl;
-    cout << " -Si mueren todos los \"Heroes\" "<< endl;
+    cout << " -Si mueren todos los \"Heroes\" el juego termina"<< endl;
     cout << " Diviertete :)" << endl<<endl;
     cout << " Creado por SiempreAmix"<<(char)169<< endl<<endl;
 
-    cout << " 1. Regresar al menu" << endl;
+    cout << " 1. Regresar al menú" << endl;
     cout << " 0. Salir del juego" << endl;
     bool valido=true;
     do{
@@ -335,11 +335,11 @@ void informacion(){
                     }
                 }
                 else{
-                    throw "  Opcion no valida\n";
+                    throw "  Opción no valida\n";
                 }
             }
             else{
-                throw "  Opcion no valida\n";
+                throw "  Opción no valida\n";
             }
         }
         catch(const char* msg){
@@ -366,7 +366,7 @@ void menu(){
     bool Valido=false;
     while(Valido==false){
         display();
-        cout<< "  Tu seleccion: ";
+        cout<< "  Tu selecciún: ";
         cin >> userChoice;
         try{
             if(isValidInt(userChoice)==true){
@@ -390,10 +390,10 @@ void menu(){
                     }
                 }
                 else{
-                    throw "  Opcion no valida\n";
+                    throw "  Opción no valida\n";
                 }
             } else{
-                throw "  Opcion no valida\n";
+                throw "  Opción no valida\n";
             }
         }
         catch(const char* msg){
@@ -419,7 +419,7 @@ void display(){
     string S1= "----------------------- ROUNDABOUT: ABALLISTER'S CURSE -----------------------";
     string S2= "==============================================================================";
     string S3= " 1. Iniciar juego                                                             ";
-    string S4= " 2. Informacion                                                               ";
+    string S4= " 2. Información                                                               ";
     string S5= " 3. Salir                                                                     ";
     counter1 = size;
     for(index2 = 0; index2 <= size ; index2++){
@@ -562,7 +562,7 @@ void timerThread(){
     Sleep(1000);
     seg++;
     }
-    cout<<"  La partida duro " << horas<<":"<<minutos<<":"<<seg<<endl;
+    cout<<"  La partida duró: " << horas<<":"<<minutos<<":"<<seg<<endl;
 }
 
 /**
@@ -611,7 +611,7 @@ void Dungeons(){
 		{
             case Keyleft:
             {
-                cout <<endl<< "you pressed : left" <<endl;
+                cout <<endl<< "Presionaste : izquierda" <<endl;
                 try
                 {
                     player.y--;
@@ -635,7 +635,7 @@ void Dungeons(){
             break;
             case Keytop:
             {
-                cout << endl<<"you pressed : up" <<endl;
+                cout << endl<<"Presionaste : arriba" <<endl;
                 try
                 {
                     player.x--;
@@ -659,7 +659,7 @@ void Dungeons(){
             break;
             case Keyright:
             {
-                cout << endl<<"you pressed : right" <<endl;
+                cout << endl<<"Presionaste : derecha" <<endl;
                 try
                 {
                     player.y++;
@@ -684,7 +684,7 @@ void Dungeons(){
             break;
             case Keydown:
             {
-                cout <<endl<< "you pressed : down" <<endl;
+                cout <<endl<< "Presionaste : abajo" <<endl;
                 try
                 {
                     player.x++;
@@ -1117,9 +1117,9 @@ void pattacks(stats* member_b, int mem_num, int turn, int& enemies, int& heros){
         int op, op2, width = 30;
         bool op_inc = true;
         cout<<"\n----------------Ataques------------------\n"
-        	<<1<<"      	La Cruz(ataque normal)"<<endl
-        	<<2<<"     	\"Holy Water\"(sanar)"<<endl
-        	<<3<<"      	Oracion(aumentar stats)"<<endl;
+        	<<1<<"      	La Cruz(Ataque normal)"<<endl
+        	<<2<<"     	\"Holy Water\"(Curacion)"<<endl
+        	<<3<<"      	Oracion(Mejorar caracteristicas)"<<endl;
         while (op_inc)
         {
             try
@@ -1137,7 +1137,7 @@ void pattacks(stats* member_b, int mem_num, int turn, int& enemies, int& heros){
             }
 
             catch (const int nub){
-                cout << "No sabes elegir?\n";
+                cout << "¿No sabes elegir?\n";
             }
         }
         clear_screen();
@@ -1169,7 +1169,7 @@ void pattacks(stats* member_b, int mem_num, int turn, int& enemies, int& heros){
                 cout << msg;
             }
             catch (const int nub){
-                cout << "opciones son: ";
+                cout << "Las opciones son: ";
                 for (int i = 1; i <= mem_num; i++)
                     cout << i << " ";
             }
@@ -1235,9 +1235,9 @@ void rattacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
         int op, op2, width = 30, multi = 1;
         bool op_inc = true;
         cout<<"\n----------------Ataques------------------\n"
-        	<<1<<"      	Ataque por la espalda(ataque con posible crit)"<<endl
-        	<<2<<"      	Cuchillazo(ataque normal)"<<endl
-        	<<3<<"      	Perforazion(ataque que ignora la defensa)"<<endl;
+        	<<1<<"      	Ataque por la espalda(Ataque con posibilidad de critico)"<<endl
+        	<<2<<"      	Cuchillazo(Ataque normal)"<<endl
+        	<<3<<"      	Perforazion(Ataque que ignora la defensa)"<<endl;
         while (op_inc)
         {
             try
@@ -1255,7 +1255,7 @@ void rattacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
             }
 
             catch (const int nub){
-                cout << "No sabes elegir?\n";
+                cout << "¿No sabes elegir?\n";
             }
         }
         clear_screen();
@@ -1288,7 +1288,7 @@ void rattacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
             }
 
             catch (const int nub){
-                cout << "opciones son: ";
+                cout << "Las opciones son: ";
                 for (int i = 1; i <= mem_num; i++)
                     cout << i << " ";
                 }
@@ -1357,9 +1357,9 @@ void gattacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
         int op, op2, width = 30;
         bool op_inc = true;
         cout<<"\n----------------Ataques------------------\n"
-        	<<1<<"      	Ataque con espada(ataque normal)"<<endl
-        	<<2<<"      	Ataque con escudo(ataque que tambien baja defensa)"<<endl
-        	<<3<<"      	Enojo(incrementas stats)"<<endl;
+        	<<1<<"      	Ataque con espada(Ataque normal)"<<endl
+        	<<2<<"      	Ataque con escudo(Ataque que tambien baja defensa)"<<endl
+        	<<3<<"      	Enojo(Incrementa las caracteristicas)"<<endl;
         while (op_inc)
         {
             try
@@ -1377,7 +1377,7 @@ void gattacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
             }
 
             catch (const int nub){
-                cout << "No sabes elegir?\n";
+                cout << "¿No sabes elegir?\n";
             }
         }
         clear_screen();
@@ -1414,7 +1414,7 @@ void gattacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
             }
 
             catch (const int nub){
-                cout << "opciones son: ";
+                cout << "Las opciones son: ";
                 for (int i = 1; i <= mem_num; i++)
                     cout << i << " ";
             }
@@ -1487,9 +1487,9 @@ void battacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
         int op, op2, width = 30;
         bool op_inc = true;
         cout<<"\n----------------Ataques------------------\n"
-        	<<1<<"      	Aplastamiento banjo(ataque normal)"<<endl
-        	<<2<<"      	Cancion(aumentar stats)"<<endl
-        	<<3<<"      	A través del fuego y las llamas(aumentar stats mas pero a costo de vida)"<<endl;
+        	<<1<<"      	Aplastamiento banjo(Ataque normal)"<<endl
+        	<<2<<"      	Cancion(Mejorar las caracteristicas)"<<endl
+        	<<3<<"      	A través del fuego y las llamas(Mejora las caracteristicas pero baja la vida)"<<endl;
         while (op_inc)
         {
             try
@@ -1507,7 +1507,7 @@ void battacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
             }
 
             catch (const int nub){
-                cout << "No sabes elegir?\n";
+                cout << "¿No sabes elegir?\n";
             }
         }
         clear_screen();
@@ -1540,7 +1540,7 @@ void battacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
             }
 
             catch (const int nub){
-                cout << "opciones son: ";
+                cout << "Las opciones son: ";
                 for (int i = 1; i <= mem_num; i++)
                     cout << i << " ";
             }
@@ -1610,9 +1610,9 @@ void mattacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
         int op, op2, op2_2, width = 30;
         bool op_inc = true;
         cout<<"\n----------------Ataques------------------\n"
-        	<<1<<"      	Supernova(ataca a todos)"<<endl
-        	<<2<<"      	Relampago(ataque a dos enemigos)"<<endl
-        	<<3<<"      	Acido(baja defensa a dos enemigos)"<<endl;
+        	<<1<<"      	Supernova(Ataca a todos)"<<endl
+        	<<2<<"      	Relampago(Ataque a dos enemigos)"<<endl
+        	<<3<<"      	Acido(Baja defensa a dos enemigos)"<<endl;
         while (op_inc)
         {
             try
@@ -1630,7 +1630,7 @@ void mattacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
             }
 
             catch (const int nub){
-                cout << "No sabes elegir?\n";
+                cout << "¿No sabes elegir?\n";
             }
         }
         clear_screen();
@@ -1666,7 +1666,7 @@ void mattacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
             }
 
             catch (const int nub){
-                cout << "opciones son: ";
+                cout << "Las opciones son: ";
                 for (int i = 1; i <= mem_num; i++)
                     cout << i << " ";
             }
@@ -1863,16 +1863,17 @@ void level_opening(){
     int i = 0;
     string n;
     cout << "   Después de una sangrienta pelea contra un dragón en el monte de la oscuridad " << endl;
-    cout << "   Y tras naufragar junto con la tripulacion del barco mientras viajaban por el mar de Marloc" << endl;
+    cout << "   Y tras naufragar junto con la tripulación del barco mientras viajaban por el mar de Marloc" << endl;
     getch();
     clear_screen();
     cout << "  	Nuestro héroe por fin ha llegado a tierra" << endl;
     getch();
     clear_screen();
-    cout << " 	Ahora dime aventurero, ¿cuál es tu nombre?\n\n	";
+    cout << " 	Ahora dime aventurero, ¿Cuál es tu nombre?\n\n	";
     cin >> Hero.nombre;
     assert(Hero.nombre != "Wong");
     assert(Hero.nombre != "wong");
+    assert(Hero.nombre != "WONG");
     cout << "	Perfecto " << Hero.nombre << endl;
     getch();
     clear_screen();
@@ -1881,31 +1882,31 @@ void level_opening(){
     cout << " 	Porque muy posiblemente sera la ùltima" << endl;
     getch();
     clear_screen();
-    cout << " 	Un pequeño flashback viene a la mente de " << Hero.nombre << endl;
+    cout << " 	Un pequeño recuerdo viene a la mente de " << Hero.nombre << endl;
     cout << endl;
-    cout << " 	Se encuentra en el barco del que naufragó, cuando uno de sus compañeros,le susurró:" << endl;
+    cout << " 	Se encuentra en el barco del que naufragó, cuando uno de sus compañeros le susurró:" << endl;
     cout << endl;
-    cout << "	'Nuestra vida depende de lo que encontremos en esta isla'" << endl;
+    cout << "	\"Nuestra vida depende de lo que encontremos en esta isla\"" << endl;
     cout << endl;
-    cout << " 	Después, todo se vuelve oscuro para nuestro heroe" << endl;
+    cout << " 	Después, todo se vuelve oscuro para nuestro héroe" << endl;
     getch();
     clear_screen();
     cout << " 	Tras caminar unos cuantos días, " << Hero.nombre << " se encuentra con 2 viejos conocidos" << endl;
     cout << endl;
-    cout << " 	Los valientes aventureros,Karsus Y Aballister" << endl;
+    cout << " 	Los valientes aventureros, Karsus y Aballister" << endl;
     getch();
     clear_screen();
-    cout << "¡" << Hero.nombre << " cuánto tiempo!-exclamó Aballister-después del accidente,Karsus y yo hemos perdido nuestras habilidades" << endl;
+    cout << "\"¡" << Hero.nombre << " Cuánto tiempo!\", Exclamó Aballister después del accidente \"Karsus y yo hemos perdido nuestras habilidades\"" << endl;
     getch();
     cout << endl;
-    cout << "Ayudanos a escoger cuáles quieres que desarrollemos Aballister y yo" << endl;
+    cout << "Ayudanos a escoger cuales quieres que desarrollemos Aballister y yo" << endl;
     cout << endl;
     getch();
     cout << "Recuerda que una vez escogidas no habrá marcha atrás" << endl;
     cout << endl;
     getch();
     clear_screen();
-    cout << "Primero recuerdame, ¿que clase de aventurero eres tú?" << endl;
+    cout << "Primero recuerdame, ¿Qué clase de aventurero eres tú?" << endl;
     cout << endl;
     clase(Hero, Aballister, Karsus);
     Sleep(1000);
@@ -1916,13 +1917,13 @@ void level_opening(){
     cout << "Al caminar por varios minutos encuentran un templo antiguo" << endl;
     cout << endl;
     getch();
-    cout << "En la entrada, se encuentra una ornamenta y al lado, un mensaje que dice lo siguiente: " << endl;
+    cout << "En la entrada, se encuentra una ornamenta y al lado un mensaje que dice lo siguiente: " << endl;
     cout << endl;
     getch();
-    cout << "'No existe recompensa alguna, aquel que entre aquí, no lograra salir'" << endl;
+    cout << "\"No existe recompensa alguna, aquel que entre aquí, no lograra salir\"" << endl;
     cout << endl;
     getch();
-    cout << "'Bueno podríamos estar muertos'-dijo Karsus-" << endl;
+    cout << "\"Bueno podríamos estar muertos\" dijo Karsus" << endl;
     cout << endl;
     cout << endl;
     getch();
@@ -1968,7 +1969,7 @@ void clase(stats &Hero,stats & Aballister,stats & Karsus){
     cout << endl;
     seleccionClase(Hero);
     cout << endl;
-    cout << "Introduzca la clase que deseas para Aballister" << endl;
+    cout << "Introduzca la clase que desea para Aballister" << endl;
     sele = true;
 
     while (sele)
@@ -1999,7 +2000,7 @@ void clase(stats &Hero,stats & Aballister,stats & Karsus){
         cin >> Karsus.seleccion;
         while (Karsus.seleccion == Aballister.seleccion || Karsus.seleccion == Hero.seleccion)
         {
-            cout << "Introduzca una clase que no haya sido escogido" << endl;
+            cout << "Introduzca una clase que no haya sido escogida" << endl;
             cin >> Karsus.seleccion;
         }
         sele = !isValidInt(Karsus.seleccion);
