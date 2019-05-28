@@ -295,7 +295,7 @@ void Dungeons(){
 	    for(i=0;i<30;i++)
         {
             cout<<endl;
-            for(j=0;j<40;j++)
+            for(j=0;j<30;j++)
             {
                 cout<<mapaVisible[i][j];
             }
