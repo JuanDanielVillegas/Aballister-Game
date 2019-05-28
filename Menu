@@ -290,7 +290,7 @@ int main()
     Sleep(3000);
     cout<<"Por lo que damos las gracias por derrotar a Aballister Maligno"<<endl;
     Sleep(3000);
-    cout<<"Y asi, "<<hero.nombre<<" y Karsus continuaron con sus aventuras..."<<endl;
+    cout<<"Y asi, "<<Hero.nombre<<" y Karsus continuaron con sus aventuras..."<<endl;
     Sleep(3000);
     cout<<"FIN";
     Sleep(5000);
