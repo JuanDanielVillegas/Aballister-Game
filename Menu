@@ -285,6 +285,7 @@ int main()
         gameOn=false;
         t1.join();
     }
+    gameOn=false;
     return 0;
 }
 
