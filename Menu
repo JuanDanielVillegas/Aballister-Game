@@ -1545,17 +1545,17 @@ void mattacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
                         continue;
                     if (turn == i)
                         continue;
-                    if ((member_b[turn].magia / 4) > member_b[i].defensa)
-                        member_b[i].vida -= (member_b[turn].magia / 2) - member_b[i].defensa;
+                    if ((member_b[turn].magia / 3) > member_b[i].defensa)
+                        member_b[i].vida -= (member_b[turn].magia / 3) - member_b[i].defensa;
                 }
                 break;
             case 2:
                 cout<< "\n" << member_b[turn].nombre << " ataco a " << member_b[op2].nombre
-                    << " y " << member_b[op2_2].nombre << " Hp-" << member_b[turn].magia / 1.2;
-                if ((member_b[turn].magia / 1.2) > member_b[op2].defensa)
-                    member_b[op2].vida -= (member_b[turn].magia / 1.2) - member_b[op2].defensa;
-                if ((member_b[turn].magia / 1.2) > member_b[op2_2].defensa)
-                    member_b[op2_2].vida -= (member_b[turn].magia / 1.2) - member_b[op2_2].defensa;
+                    << " y " << member_b[op2_2].nombre << " Hp-" << member_b[turn].magia /2;
+                if ((member_b[turn].magia /2) > member_b[op2].defensa)
+                    member_b[op2].vida -= (member_b[turn].magia /2) - member_b[op2].defensa;
+                if ((member_b[turn].magia /2) > member_b[op2_2].defensa)
+                    member_b[op2_2].vida -= (member_b[turn].magia /2) - member_b[op2_2].defensa;
                 break;
             case 3:
                 cout<< "\n" << member_b[turn].nombre << " uso Acido contra"
