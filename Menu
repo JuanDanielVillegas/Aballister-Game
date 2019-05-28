@@ -611,7 +611,7 @@ void Dungeons(){
 		{
             case Keyleft:
             {
-                cout <<endl<< "Presionaste : izquierda" <<endl;
+                cout <<endl<< "you pressed : left" <<endl;
                 try
                 {
                     player.y--;
@@ -621,11 +621,12 @@ void Dungeons(){
                         throw 1;
                     }
                     eventroom();
-                    if(mapas[piso][player.x][player.y]==bosssss)
-                        break;
-                    mapas[piso][player.x][player.y+1]=pasillo;
-                    mapas[piso][player.x][player.y]=pasillo;
-                    mapaVisible[player.x][player.y]=64;
+                    if(!mapas[piso][player.x][player.y]==bosssss)
+                    {
+                        mapas[piso][player.x][player.y+1]=pasillo;
+                        mapas[piso][player.x][player.y]=pasillo;
+                        mapaVisible[player.x][player.y]=64;
+                    }
                 }
                 catch(int e)
                 {
@@ -635,7 +636,7 @@ void Dungeons(){
             break;
             case Keytop:
             {
-                cout << endl<<"Presionaste : arriba" <<endl;
+                cout << endl<<"you pressed : up" <<endl;
                 try
                 {
                     player.x--;
@@ -645,11 +646,12 @@ void Dungeons(){
                         throw 1;
                     }
                     eventroom();
-                    if(mapas[piso][player.x][player.y]==bosssss)
-                        break;
-                    mapas[piso][player.x+1][player.y]=pasillo;
-                    mapas[piso][player.x][player.y]=pasillo;
-                    mapaVisible[player.x][player.y]=64;
+                    if(!mapas[piso][player.x][player.y]==bosssss)
+                    {
+                        mapas[piso][player.x+1][player.y]=pasillo;
+                        mapas[piso][player.x][player.y]=pasillo;
+                        mapaVisible[player.x][player.y]=64;
+                    }
                 }
                 catch(int e)
                 {
@@ -659,7 +661,7 @@ void Dungeons(){
             break;
             case Keyright:
             {
-                cout << endl<<"Presionaste : derecha" <<endl;
+                cout << endl<<"you pressed : right" <<endl;
                 try
                 {
                     player.y++;
@@ -669,11 +671,12 @@ void Dungeons(){
                         throw 1;
                     }
                     eventroom();
-                    if(mapas[piso][player.x][player.y]==bosssss)
-                        break;
-                    mapas[piso][player.x][player.y-1]=pasillo;
-                    mapas[piso][player.x][player.y]=pasillo;
-                    mapaVisible[player.x][player.y]=64;
+                    if(!mapas[piso][player.x][player.y]==bosssss)
+                    {
+                        mapas[piso][player.x][player.y-1]=pasillo;
+                        mapas[piso][player.x][player.y]=pasillo;
+                        mapaVisible[player.x][player.y]=64;
+                    }
 
                 }
                 catch(int e)
@@ -684,7 +687,7 @@ void Dungeons(){
             break;
             case Keydown:
             {
-                cout <<endl<< "Presionaste : abajo" <<endl;
+                cout <<endl<< "you pressed : down" <<endl;
                 try
                 {
                     player.x++;
@@ -694,11 +697,12 @@ void Dungeons(){
                         throw 1;
                     }
                     eventroom();
-                    if(mapas[piso][player.x][player.y]==bosssss)
-                        break;
-                    mapas[piso][player.x-1][player.y]=pasillo;
-                    mapas[piso][player.x][player.y]=pasillo;
-                    mapaVisible[player.x][player.y]=64;
+                    if(!mapas[piso][player.x][player.y]==bosssss)
+                    {
+                        mapas[piso][player.x-1][player.y]=pasillo;
+                        mapas[piso][player.x][player.y]=pasillo;
+                        mapaVisible[player.x][player.y]=64;
+                    }
                 }
                 catch(int e)
                 {
