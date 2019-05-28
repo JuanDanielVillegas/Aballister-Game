@@ -1224,10 +1224,11 @@ void pattacks(stats* member_b, int mem_num, int turn, int& enemies, int& heros){
         switch (op)
         {
             case 1:
-                cout << "\n" << member_b[turn].nombre << " ataco a " << member_b[op2].nombre
-                    << " Hp-" << member_b[turn].ataque;
-                if (member_b[turn].ataque > member_b[op2].defensa)
+                cout << "\n" << member_b[turn].nombre << " ataco a " << member_b[op2].nombre;
+                if (member_b[turn].ataque > member_b[op2].defensa){
+			cout<< " Hp-" << member_b[turn].ataque- member_b[op2].defensa;
                     member_b[op2].vida -= member_b[turn].ataque - member_b[op2].defensa;
+		    }
                 break;
             case 2:
                 cout << "\n" << member_b[turn].nombre << " sano a " << member_b[op2].nombre
@@ -1348,10 +1349,11 @@ void rattacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
                 srand(time(NULL));
                 if ((rand() % 3 + 1) == 2)
                     multi = 2;
-                cout<< "\n" << member_b[turn].nombre << " ataco a " << member_b[op2].nombre
-                    << " Hp-" << member_b[turn].ataque * multi;
-                if ((member_b[turn].ataque * multi) > member_b[op2].defensa)
+                cout<< "\n" << member_b[turn].nombre << " ataco a " << member_b[op2].nombre;
+                if ((member_b[turn].ataque * multi) > member_b[op2].defensa){
+			cout<< " Hp-" << (member_b[turn].ataque * multi)- member_b[op2].defensa;
                     member_b[op2].vida -= (member_b[turn].ataque * multi) - member_b[op2].defensa;
+		    }
                 break;
             case 2:
                 cout<< "\n" << member_b[turn].nombre << " Ataco a " << member_b[op2].nombre
@@ -1471,16 +1473,18 @@ void gattacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
         switch (op)
         {
             case 1:
-                cout<< "\n" << member_b[turn].nombre << " ataco a " << member_b[op2].nombre
-                    << " Hp-" << member_b[turn].ataque;
-                if (member_b[turn].ataque > member_b[op2].defensa)
+                cout<< "\n" << member_b[turn].nombre << " ataco a " << member_b[op2].nombre;
+                if (member_b[turn].ataque > member_b[op2].defensa){
+			cout<< " Hp-" << member_b[turn].ataque- member_b[op2].defensa;
                     member_b[op2].vida -= member_b[turn].ataque - member_b[op2].defensa;
+		    }
                 break;
             case 2:
-                cout<< "\n" << member_b[turn].nombre << " ataco a " << member_b[op2].nombre
-                    << " Hp-" << member_b[turn].ataque * .75 << " Def-";
-                if (member_b[turn].ataque * .75 > member_b[op2].defensa)
+                cout<< "\n" << member_b[turn].nombre << " ataco a " << member_b[op2].nombre;
+                if (member_b[turn].ataque * .75 > member_b[op2].defensa){
+			cout<< " Hp-" << (member_b[turn].ataque * .75 )- member_b[op2].defensa<< " Def-";
                     member_b[op2].vida -= member_b[turn].ataque * .75 - member_b[op2].defensa;
+		    }
                 member_b[op2].defensa -= (member_b[turn].velocidad / 4);
                 if (member_b[op2].defensa <= 0)
                 {
@@ -1597,10 +1601,11 @@ void battacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
         switch (op)
         {
             case 1:
-                cout<< "\n" << member_b[turn].nombre << " ataco a " << member_b[op2].nombre
-                    << " Hp-" << member_b[turn].ataque;
-                if (member_b[turn].ataque > member_b[op2].defensa)
+                cout<< "\n" << member_b[turn].nombre << " ataco a " << member_b[op2].nombre;
+                if (member_b[turn].ataque > member_b[op2].defensa){
+			cout<< " Hp-" << member_b[turn].ataque- member_b[op2].defensa;
                     member_b[op2].vida -= member_b[turn].ataque - member_b[op2].defensa;
+		    }
                 break;
             case 2:
                 cout<< "\n" << member_b[turn].nombre << " esta inspirado\n"
@@ -1774,11 +1779,15 @@ void mattacks(stats* member_b, int mem_num, int turn, int&enemies,int&heros){
                 break;
             case 2:
                 cout<< "\n" << member_b[turn].nombre << " ataco a " << member_b[op2].nombre
-                    << " y " << member_b[op2_2].nombre << " Hp-" << member_b[turn].magia /2;
-                if ((member_b[turn].magia /2) > member_b[op2].defensa)
+                    << " y " << member_b[op2_2].nombre;
+                if ((member_b[turn].magia /2) > member_b[op2].defensa){
+			cout<< " Hp-" << (member_b[turn].magia /2)- member_b[op2].defensa;
                     member_b[op2].vida -= (member_b[turn].magia /2) - member_b[op2].defensa;
-                if ((member_b[turn].magia /2) > member_b[op2_2].defensa)
+		    }
+                if ((member_b[turn].magia /2) > member_b[op2_2].defensa){
+			cout<< " Hp-" << (member_b[turn].magia /2)- member_b[op2_2].defensa;
                     member_b[op2_2].vida -= (member_b[turn].magia /2) - member_b[op2_2].defensa;
+		    }
                 break;
             case 3:
                 cout<< "\n" << member_b[turn].nombre << " uso Acido contra"
