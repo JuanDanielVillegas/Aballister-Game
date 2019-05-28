@@ -269,6 +269,7 @@ void clear_screen();
 int getKey();
 void cstats(stats*, int, int, int, int, int, int, int, int, int, int);
 bool battle();
+bool BossBattle();
 void rings();
 void eventroom();
 
@@ -1993,3 +1994,87 @@ void eventroom()
             }
         }
 }
+bool BossBattle(){
+    int members,heros=0,width=30,enemies=0,type1=0,type2=0,type3=0,type4=0,type5=0,boss1=0,boss2=0,boss3=0,boss4=0;
+    bool inbtl=true;
+    switch(piso){
+    case 0:
+        cout<<"JahAHa BiEEEEeenveEeeenidos a la cueva cccaAaLaaVeeera, pRrrrEparanse pAAAArA moOOorIR"<<endl;
+        enemies=2;
+        type1++;
+        boss1++;
+            break;
+    case 1:
+        cout<<"nNooOoO yEgArAn mAaaZ LeeeGosSS"<<endl;
+        enemies=3;
+        type1++;
+        type2++;
+        boss2++;
+            break;
+    case 2:
+        cout<<"ESSstAaNh A PuNtO0o dhEe mOrrIR"<<endl;
+        type2=2;
+        enemies=3;
+        boss3++;
+            break;
+    case 3:
+        cout<<"Se encuentran una extrana gema contiene una aura malvada"
+            <<"\nLa gema empieza a reaccionar con el anillo ";
+        if(Aballister.vivo)
+            cout<<"que tiene Aballister";
+        else
+            cout<<"que era de Aballister antes de murir";
+        getch();
+        cout<<"DE REPENTE TODO SE VUELVE OSCURO"<<endl;
+        cout<<"Enfrente de nuestro heroe se encuentra uuna entidad maligna, listo para enfrentarse a nuestro heroe"<<endl
+            <<"Mirando más de cerca te das cuenta de que la figura del mal es la sombra maldita de Aballisters";
+        getch();
+        enemies=1;
+        boss4=1;
+    }
+    members=enemies+3;
+    stats member_b[members];
+    cstats(member_b,enemies,type1,type2,type3,type4,type5,boss1,boss2,boss3,boss4);
+	if(Hero.vivo)
+    	heros++;
+	if(Aballister.vivo)
+    	heros++;
+	if(Karsus.vivo)
+    	heros++;
+    sort(member_b,member_b+members,player_sorter);
+	for(int i=0;i<members;i++){
+        	cout<<member_b[i].nombre<<setw(width-member_b[i].nombre.size())
+        	<<"Vida: "<<member_b[i].vida<<"/"<<member_b[i].mvida<<endl;
+	}
+	getch();
+	while(inbtl){
+    	for(int i=(members-1);i>=0;--i){
+        	if(heros==0||enemies==0){
+            	inbtl=false;
+            	i=0;
+            	continue;
+        	}
+        	member_b[i].attack(member_b,members,i,enemies,heros);
+    	}
+
+	}
+	if(heros>0||enemies==0){
+        Hero.ataque+=5;
+        Hero.mvida+=5;
+        Hero.magia+=5;
+        Hero.velocidad+=5;
+        Aballister.ataque+=5;
+        Aballister.mvida+=5;
+        Aballister.magia+=5;
+        Aballister.velocidad+=5;
+        Karsus.ataque+=5;
+        Karsus.mvida+=5;
+        Karsus.magia+=5;
+        Karsus.velocidad+=5;
+    	return true;
+	}
+	else
+    	return false;
+
+}
+
