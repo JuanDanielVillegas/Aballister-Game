@@ -615,7 +615,7 @@ void Dungeons(){
 
 	while (true)
 	{
-	if(piso=4)
+        if(piso==4)
             break;
         /** Vista del jugador a traves de la niebla en su alrededor cuando empieza **/
         if(firstIteration)
