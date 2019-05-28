@@ -286,7 +286,6 @@ int main()
         gameOn=false;
         t1.join();
     }
-    t1.join();
     cout<<"Al acabarse la batalla nuestro héroe voltea a su alrededor Karsus y Aballister muerto"<<endl;
     Sleep(3000);
     cout<<"Tiene en su poder el objeto, que brilla incandescentemente"
