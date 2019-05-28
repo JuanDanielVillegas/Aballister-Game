@@ -586,8 +586,6 @@ void Dungeons(){
 
     /** i es la coordenada y de la impresion de pantalla, j  es la coordenada x de la impresion de pantalla
         y k es el input de la tecla que se guarda como valor entero **/
-	if(piso=4)
-            break;
 	
 	int i=0,j=0,k=0;
 
@@ -595,6 +593,8 @@ void Dungeons(){
 	{
         /** Vista del jugador a traves de la niebla en su alrededor cuando empieza **/
         if(firstIteration)
+	if(piso=4)
+            break;
         {
             firstIteration=0; /** quita la primera iteracion **/
 
