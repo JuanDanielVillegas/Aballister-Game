@@ -578,6 +578,9 @@ void Dungeons(){
 
     /** i es la coordenada y de la impresion de pantalla, j  es la coordenada x de la impresion de pantalla
         y k es el input de la tecla que se guarda como valor entero **/
+	if(piso=4)
+            break;
+	
 	int i=0,j=0,k=0;
 
 	while (true)
