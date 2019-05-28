@@ -103,6 +103,7 @@ int main()
     menu();
     level_opening();
     Dungeons();
+    gameOn=false;
     t1.join(); ///Este al final, donde termina el juego igualar gameOn= false
     return 0;
 }
