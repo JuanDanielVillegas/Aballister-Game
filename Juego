@@ -1256,10 +1256,10 @@ void pattacks(stats * member_b,int mem_num,int turn,int& enemies,int& heros){
     	string target;
     	int op,op2,width=30;
     	bool op_inc=true;
-    	cout<<"\n--------------Ataques----------------\n"
-        	<<1<<"      	La Cruz"<<endl
-        	<<2<<"     	\"Holy Water\""<<endl
-        	<<3<<"      	Oracion"<<endl;
+    	cout<<"\n----------------Ataques------------------\n"
+		<<1<<"      	La Cruz(ataque normal)"<<endl
+		<<2<<"     	\"Holy Water\"(sanar)"<<endl
+		<<3<<"      	Oracion(aumentar stats)"<<endl;
     	while(op_inc){
         	try{
             	cin>>ops;
@@ -1281,8 +1281,8 @@ void pattacks(stats * member_b,int mem_num,int turn,int& enemies,int& heros){
     	cout<<"\n Turno de "<<member_b[turn].nombre;
     	cout<<"\n---------------Seleccion---------------\n";
     	for(int i=0;i<mem_num;i++){
-        	cout<<i+1<<":"<<member_b[i].nombre<<setw(width-member_b[i].nombre.size())
-        	<<"Vida: "<<member_b[i].vida<<"/"<<member_b[i].mvida<<endl;
+        	cout<<i+1<<":  "<<member_b[i].nombre<<setw(width-member_b[i].nombre.size())
+        	<<"Vida: "<<member_b[i].vida<<"/"<<member_b[i].mvida<<"  :"<<i+1<<endl;
     	}
     	op_inc=true;
     	while(op_inc){
@@ -1357,10 +1357,10 @@ void rattacks(stats * member_b,int mem_num,int turn,int& enemies,int& heros){
     	string target;
     	int op,op2,width=30,multi=1;
     	bool op_inc=true;
-    	cout<<"\n--------------Ataques----------------\n"
-        	<<1<<"      	Ataque por la espalda"<<endl
-        	<<2<<"      	Cuchillazo"<<endl
-        	<<3<<"      	Perforazion"<<endl;
+    	cout<<"\n----------------Ataques------------------\n"
+        	<<1<<"      	Ataque por la espalda(ataque con posible crit)"<<endl
+        	<<2<<"      	Cuchillazo(ataque normal)"<<endl
+        	<<3<<"      	Perforazion(ataque que ignora la defensa)"<<endl;
     	while(op_inc){
         	try{
             	cin>>ops;
@@ -1382,8 +1382,8 @@ void rattacks(stats * member_b,int mem_num,int turn,int& enemies,int& heros){
     	cout<<"\n Turno de "<<member_b[turn].nombre;
     	cout<<"\n---------------Seleccion---------------\n";
     	for(int i=0;i<mem_num;i++){
-        	cout<<i+1<<":"<<member_b[i].nombre<<setw(width-member_b[i].nombre.size())
-        	<<"Vida: "<<member_b[i].vida<<"/"<<member_b[i].mvida<<endl;
+        	cout<<i+1<<":  "<<member_b[i].nombre<<setw(width-member_b[i].nombre.size())
+        	<<"Vida: "<<member_b[i].vida<<"/"<<member_b[i].mvida<<"  :"<<i+1<<endl;
     	}
     	op_inc=true;
     	while(op_inc){
@@ -1458,10 +1458,10 @@ void gattacks(stats * member_b,int mem_num,int turn,int& enemies,int& heros){
     	string target;
     	int op,op2,width=30;
     	bool op_inc=true;
-    	cout<<"\n--------------Ataques----------------\n"
-        	<<1<<"      	Ataque con espada"<<endl
-        	<<2<<"      	Ataque con escudo"<<endl
-        	<<3<<"      	Enojo"<<endl;
+    	cout<<"\n----------------Ataques------------------\n"
+        	<<1<<"      	Ataque con espada(ataque normal)"<<endl
+        	<<2<<"      	Ataque con escudo(ataque que tambien baja defensa)"<<endl
+        	<<3<<"      	Enojo(incrementas stats)"<<endl;
     	while(op_inc){
         	try{
             	cin>>ops;
@@ -1483,8 +1483,8 @@ void gattacks(stats * member_b,int mem_num,int turn,int& enemies,int& heros){
     	cout<<"\n Turno de "<<member_b[turn].nombre;
     	cout<<"\n---------------Seleccion---------------\n";
     	for(int i=0;i<mem_num;i++){
-        	cout<<i+1<<":"<<member_b[i].nombre<<setw(width-member_b[i].nombre.size())
-        	<<"Vida: "<<member_b[i].vida<<"/"<<member_b[i].mvida<<endl;
+        	cout<<i+1<<":  "<<member_b[i].nombre<<setw(width-member_b[i].nombre.size())
+        	<<"Vida: "<<member_b[i].vida<<"/"<<member_b[i].mvida<<"  :"<<i+1<<endl;
     	}
     	op_inc=true;
     	if(op==3)
@@ -1567,10 +1567,10 @@ void battacks(stats * member_b,int mem_num,int turn,int& enemies,int& heros){
     	string target;
     	int op,op2,width=30;
     	bool op_inc=true;
-    	cout<<"\n--------------Ataques----------------\n"
-        	<<1<<"      	Aplastamiento banjo"<<endl
-        	<<2<<"      	Cancion"<<endl
-        	<<3<<"      	A través del fuego y las llamas"<<endl;
+    	cout<<"\n----------------Ataques------------------\n"
+        	<<1<<"      	Aplastamiento banjo(ataque normal)"<<endl
+        	<<2<<"      	Cancion(aumentar stats)"<<endl
+        	<<3<<"      	A través del fuego y las llamas(aumentar stats mas pero al costo de vida)"<<endl;
     	while(op_inc){
         	try{
             	cin>>ops;
@@ -1592,8 +1592,8 @@ void battacks(stats * member_b,int mem_num,int turn,int& enemies,int& heros){
     	cout<<"\n Turno de "<<member_b[turn].nombre;
     	cout<<"\n---------------Seleccion---------------\n";
     	for(int i=0;i<mem_num;i++){
-        	cout<<i+1<<":"<<member_b[i].nombre<<setw(width-member_b[i].nombre.size())
-        	<<"Vida: "<<member_b[i].vida<<"/"<<member_b[i].mvida<<endl;
+        	cout<<i+1<<":  "<<member_b[i].nombre<<setw(width-member_b[i].nombre.size())
+        	<<"Vida: "<<member_b[i].vida<<"/"<<member_b[i].mvida<<"  :"<<i+1<<endl;
     	}
     	op_inc=true;
     	while(op_inc){
@@ -1669,10 +1669,10 @@ void mattacks(stats * member_b,int mem_num,int turn,int& enemies,int& heros){
     	string target;
     	int op,op2,op2_2,width=30;
     	bool op_inc=true;
-    	cout<<"\n--------------Ataques----------------\n"
-        	<<1<<"      	Supernova"<<endl
-        	<<2<<"      	Relampago"<<endl
-        	<<3<<"      	Acido"<<endl;
+    	cout<<"\n----------------Ataques------------------\n"
+        	<<1<<"      	Supernova(ataca a todos)"<<endl
+        	<<2<<"      	Relampago(ataca a dos enemigos)"<<endl
+        	<<3<<"      	Acido(baja defensa a dos enemigos)"<<endl;
     	while(op_inc){
         	try{
             	cin>>ops;
@@ -1694,8 +1694,8 @@ void mattacks(stats * member_b,int mem_num,int turn,int& enemies,int& heros){
     	cout<<"\n Turno de "<<member_b[turn].nombre;
     	cout<<"\n---------------Seleccion---------------\n";
     	for(int i=0;i<mem_num;i++){
-        	cout<<i+1<<":"<<member_b[i].nombre<<setw(width-member_b[i].nombre.size())
-        	<<"Vida: "<<member_b[i].vida<<"/"<<member_b[i].mvida<<endl;
+        	cout<<i+1<<":  "<<member_b[i].nombre<<setw(width-member_b[i].nombre.size())
+        	<<"Vida: "<<member_b[i].vida<<"/"<<member_b[i].mvida<<"  :"<<i+1<<endl;
     	}
     	if(op==1)
         	op_inc=false;
