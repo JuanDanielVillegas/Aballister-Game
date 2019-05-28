@@ -1921,6 +1921,7 @@ void level_opening(){
     cout << endl;
     getch();
     cout << "INICIA LA AVENTURA" << endl;
+    Sleep(2000);
     setlocale(LC_ALL, "C");
 }
 
