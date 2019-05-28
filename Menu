@@ -999,8 +999,8 @@ bool battle(){
 void rings(){
     int item = 0, whomst = 0;
     srand(time(NULL));
-    item = (rand() % 3 + 1);
-    whomst = (rand() % 5 + 1);
+    item = (rand() % 5 + 1);
+    whomst = (rand() % 3 + 1);
     cout << "\n Te has encontrado un anillo magico";
     switch (item)
     {
@@ -2247,12 +2247,14 @@ bool BossBattle(){
     switch(piso){
     case 0:
         cout<<"JahAHa BiEEEEeenveEeeenidos a la cueva cccaAaLaaVeeera, pRrrrEparanse pAAAArA moOOorIR"<<endl;
+	Sleep(3000);
         enemies=2;
         type1++;
         boss1++;
             break;
     case 1:
         cout<<"nNooOoO yEgArAn mAaaZ LeeeGosSS"<<endl;
+	Sleep(3000);
         enemies=3;
         type1++;
         type2++;
@@ -2260,21 +2262,25 @@ bool BossBattle(){
             break;
     case 2:
         cout<<"ESSstAaNh A PuNtO0o dhEe mOrrIR"<<endl;
+	Sleep(3000);
         type2=2;
         enemies=3;
         boss3++;
             break;
     case 3:
-        cout<<"Se encuentran una extrana gema contiene una aura malvada"
+        cout<<"Se encuentran una extrana gema que contiene una aura malvada"
             <<"\nLa gema empieza a reaccionar con el anillo ";
+	    Sleep(3000);
         if(Aballister.vivo)
             cout<<"que tiene Aballister";
         else
             cout<<"que era de Aballister antes de murir";
         getch();
         cout<<"DE REPENTE TODO SE VUELVE OSCURO"<<endl;
+	Sleep(3000);
         cout<<"Enfrente de nuestro heroe se encuentra uuna entidad maligna, listo para enfrentarse a nuestro heroe"<<endl
             <<"Mirando más de cerca te das cuenta de que la figura del mal es la sombra maldita de Aballisters";
+	    Sleep(5000);
         getch();
         enemies=1;
         boss4=1;
