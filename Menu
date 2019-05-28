@@ -956,6 +956,7 @@ bool battle(){
             break;
     case 2:
         type4++;
+	yeet--;
         for(yeet;yeet>0;yeet--)
             type1++;
             break;
