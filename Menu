@@ -295,6 +295,7 @@ int main()
     cout<<"Ahora tienes la opcion de destruir el objeto o usarlo a tu favor"<<endl;
     Sleep(3000);
     cin>>finalselection;
+    cout<<"Destruir el objeto magico=1 o usarlo=2"<<endl;
     if(finalselection==1){
     cout<<"Nuestro héroe, ha eliminado el objeto más peligroso de la faz de la tierra… o al menos eso cree"<<endl;
     cout<<"Todo lo que queda es continuar y buscar una manera de regresar a la civilización"<<endl;
