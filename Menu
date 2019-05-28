@@ -286,7 +286,6 @@ int main()
         gameOn=false;
         t1.join();
     }
-    cout<<"Al acabarse la batalla nuestro héroe voltea a su alrededor Karsus y Aballister muerto"<<endl;
     Sleep(3000);
     cout<<"Tiene en su poder el objeto, que brilla incandescentemente"
         <<"Ese objeto que tanto trabajo le había costado por fin está en sus manos"
@@ -314,7 +313,7 @@ int main()
     Sleep(3000);
     cout<<"Por lo que damos las gracias por derrotar a Aballister Maligno"<<endl;
     Sleep(3000);
-    cout<<"Y asi, "<<Hero.nombre<<" y Karsus continuaron con sus aventuras..."<<endl;
+    cout<<"Y asi, "<<Hero.nombre<<" continuaron con sus aventuras..."<<endl;
     Sleep(3000);
     cout<<"FIN";
     Sleep(5000);
