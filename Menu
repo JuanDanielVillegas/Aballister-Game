@@ -1960,6 +1960,16 @@ void eventroom()
         }
     else if(mapas[piso][player.x][player.y]==bosssss)
         {
+	    if(BossBattle())
+                cout<<"Has ganado el combate, continua con tu aventura!"<<endl;
+            else
+            {
+                clear_screen();
+                cout<<"YOU DIED"<<endl;
+                Sleep(1000);
+                getch;
+                exit(1);
+            }
             for(int i=0;i<30;i++)
             {
                 for(int j=0;j<30;j++)
