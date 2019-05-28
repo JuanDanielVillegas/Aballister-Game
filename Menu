@@ -806,72 +806,66 @@ void cstats(stats* members, int enemies, int t1, int t2, int t3, int t4, int t5,
     }
 }
 bool battle(){
-    int yeet, members, heros = 0, width = 30, enemies = 0, type1 = 0, type2 = 0, type3 = 0, type4 = 0, type5 = 0, boss1 = 0, boss2 = 0, boss3 = 0, boss4 = 0;
-    bool inbtl = true;
-    srand(time(NULL));
-    enemies = (rand() % 3 + 2);
-    members = enemies + 3;
-    yeet = enemies;
+    int yeet,members,heros=0,width=30,enemies=0,type1=0,type2=0,type3=0,type4=0,type5=0,boss1=0,boss2=0,boss3=0,boss4=0;
+    bool inbtl=true;
+	srand (time(NULL));
+    enemies=(rand() % 3 + 2);
+    members=enemies+3;
+    yeet=enemies;
     stats member_b[members];
-    switch (piso)
-    {
-        case 0:
+    switch(piso){
+    case 0:
+        type2++;
+        yeet--;
+        for(yeet;yeet>0;yeet--)
+            type1++;
+            break;
+    case 1:
+        type3++;
+        yeet--;
+        for(yeet;yeet>0;yeet--)
+            type1++;
+            break;
+    case 2:
+        type4++;
+        for(yeet;yeet>0;yeet--)
+            type1++;
+            break;
+    case 3:
+        type5++;
+        yeet--;
+        for(yeet;yeet>0;yeet--)
             type2++;
-            yeet--;
-            for (int i = 0; i < yeet; i++)
-                type1++;
-            break;
-        case 1:
-            type3++;
-            yeet--;
-            for (int i = 0; i < yeet; i++)
-                type1++;
-            break;
-        case 2:
-            type4++;
-            yeet--;
-            for (int i = 0; i < yeet; i++)
-                type1++;
-            break;
-        case 3:
-            type5++;
-            yeet--;
-            for (int i = 0; i < yeet; i++)
-                type2++;
             break;
     }
-    cstats(member_b, enemies, type1, type2, type3, type4, type5, boss1, boss2, boss3, boss4);
-    if (Hero.vivo)
-        heros++;
-    if (Aballister.vivo)
-        heros++;
-    if (Karsus.vivo)
-        heros++;
-    sort(member_b, member_b + 6, player_sorter);
-    for (int i = 0; i < members; i++)
-    {
-        cout << member_b[i].nombre << setw(width - member_b[i].nombre.size())
-        << "Vida: " << member_b[i].vida << "/" << member_b[i].mvida << endl;
-    }
-    getch();
-    while (inbtl)
-    {
-        for (int i = (members - 1); i >= 0; --i)
-        {
-            if (heros == 0 || enemies == 0)
-            {
-                inbtl = false;
-                i = 0;
-                continue;
-            }
-            member_b[i].attack(member_b, members, i, enemies, heros);
-        }
+    cstats(member_b,enemies,type1,type2,type3,type4,type5,boss1,boss2,boss3,boss4);
+	if(Hero.vivo)
+    	heros++;
+	if(Aballister.vivo)
+    	heros++;
+	if(Karsus.vivo)
+    	heros++;
+    sort(member_b,member_b+members,player_sorter);
+	for(int i=0;i<members;i++){
+        	cout<<member_b[i].nombre<<setw(width-member_b[i].nombre.size())
+        	<<"Vida: "<<member_b[i].vida<<"/"<<member_b[i].mvida<<endl;
+	}
+	getch();
+	while(inbtl){
+    	for(int i=(members-1);i>=0;--i){
+        	if(heros==0||enemies==0){
+            	inbtl=false;
+            	i=0;
+            	continue;
+        	}
+        	member_b[i].attack(member_b,members,i,enemies,heros);
+    	}
 
-    }
-    if (heros > 0 || enemies == 0)
-        return true;
-    else
-        return false;
+	}
+	if(heros>0||enemies==0)
+    	return true;
+	else
+    	return false;
 
 }
 void rings(){
