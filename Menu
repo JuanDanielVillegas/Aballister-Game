@@ -283,41 +283,43 @@ int main()
      if(gameOn==true){
         level_opening();
         Dungeons();
-        gameOn=false;
         t1.join();
     }
-    Sleep(3000);
-    cout<<"Tiene en su poder el objeto, que brilla incandescentemente"
-        <<"Ese objeto que tanto trabajo le había costado por fin está en sus manos"
-        <<"ahora tiene la opción de destruirlo o de convertirse en lo que acababa de destruir"<<endl;
-    Sleep(10000);
-    cout<<"Ahora tienes la opcion de destruir el objeto o usarlo a tu favor"<<endl;
-    Sleep(3000);
-    cin>>finalselection;
-    cout<<"Destruir el objeto magico=1 o usarlo=2"<<endl;
-    if(finalselection==1){
-    cout<<"Nuestro héroe, ha eliminado el objeto más peligroso de la faz de la tierra… o al menos eso cree"<<endl;
-    cout<<"Todo lo que queda es continuar y buscar una manera de regresar a la civilización"<<endl;
+    if (gameOn)
+    {
+        Sleep(3000);
+        cout<<"Tiene en su poder el objeto, que brilla incandescentemente"
+            <<"Ese objeto que tanto trabajo le había costado por fin está en sus manos"
+            <<"ahora tiene la opción de destruirlo o de convertirse en lo que acababa de destruir"<<endl;
         Sleep(10000);
+        cout<<"Ahora tienes la opcion de destruir el objeto o usarlo a tu favor"<<endl;
+        Sleep(3000);
+        cin>>finalselection;
+        cout<<"Destruir el objeto magico=1 o usarlo=2"<<endl;
+        if(finalselection==1){
+        cout<<"Nuestro héroe, ha eliminado el objeto más peligroso de la faz de la tierra… o al menos eso cree"<<endl;
+        cout<<"Todo lo que queda es continuar y buscar una manera de regresar a la civilización"<<endl;
+            Sleep(10000);
+                }
+                else if(finalselection==2){
+                    cout<<"Nuestro heroe ahora es horrible, por el momento, ahora es momento de tomar el control del planeta"<<endl;
+                    cout<<"VIDA +10000000"<<endl;
+                    cout<<"MAGIA +10000"<<endl;
+                    cout<<" DEFENSA+1000000"<<endl;
+                    cout<<" ATAQUE+100000"<<endl;
+                    cout<<"VELOCIDAD+10000"<<endl;
+                    Sleep(10000);
             }
-            else if(finalselection==2){
-                cout<<"Nuestro heroe ahora es horrible, por el momento, ahora es momento de tomar el control del planeta"<<endl;
-                cout<<"VIDA +10000000"<<endl;
-                cout<<"MAGIA +10000"<<endl;
-                cout<<" DEFENSA+1000000"<<endl;
-                cout<<" ATAQUE+100000"<<endl;
-                cout<<"VELOCIDAD+10000"<<endl;
-                Sleep(10000);
-		}
-    cout<<"Haz demostrado tu valentía como un guerrero excepcional"<<endl;
-    Sleep(3000);
-    cout<<"Por lo que damos las gracias por derrotar a Aballister Maligno"<<endl;
-    Sleep(3000);
-    cout<<"Y asi, "<<Hero.nombre<<" continuaron con sus aventuras..."<<endl;
-    Sleep(3000);
-    cout<<"FIN";
-    Sleep(5000);
-    return 0;
+        cout<<"Haz demostrado tu valentía como un guerrero excepcional"<<endl;
+        Sleep(3000);
+        cout<<"Por lo que damos las gracias por derrotar a Aballister Maligno"<<endl;
+        Sleep(3000);
+        cout<<"Y asi, "<<Hero.nombre<<" continuaron con sus aventuras..."<<endl;
+        Sleep(3000);
+        cout<<"FIN";
+        Sleep(5000);
+        return 0;
+    }
 }
 
 /** Definicion de Funciones **/
