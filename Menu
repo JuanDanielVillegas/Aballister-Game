@@ -298,15 +298,15 @@ int main()
     cin>>finalselection;
     if(finalselection==1){
     cout<<"Nuestro héroe, ha eliminado el objeto más peligroso de la faz de la tierra… o al menos eso cree"<<endl;
-        <<"Todo lo que queda es continuar y buscar una manera de regresar a la civilización"<<endl;
+    cout<<"Todo lo que queda es continuar y buscar una manera de regresar a la civilización"<<endl;
         Sleep(10000);
             }
-            if else(finalselection==2){
+            else if(finalselection==2){
                 cout<<"Nuestro heroe ahora es horrible, por el momento, ahora es momento de tomar el control del planeta"<<endl;
-                cout<<"VIDA +10000000"<<endl
-                cout<<"MAGIA +10000"<<endl
-                cout<<" DEFENSA+1000000"<<endl
-                cout<<" ATAQUE+100000"<<endl
+                cout<<"VIDA +10000000"<<endl;
+                cout<<"MAGIA +10000"<<endl;
+                cout<<" DEFENSA+1000000"<<endl;
+                cout<<" ATAQUE+100000"<<endl;
                 cout<<"VELOCIDAD+10000"<<endl;
                 Sleep(10000);
 		}
@@ -326,7 +326,7 @@ int main()
 /**
  *  Función: informacion
  *
- *  @Descripcion: Función que muestra la información general del juego, así como 
+ *  @Descripcion: Función que muestra la información general del juego, así como
  *		  sus reglas y especificaciónes, también cuenta con un switch para poder regresar al menú o cerrar el programa
  *  @Parametros: No recibe parametros
  *  @Retorna: Nada debido a que es una función void
@@ -610,7 +610,7 @@ void Dungeons(){
 
     /** i es la coordenada y de la impresion de pantalla, j  es la coordenada x de la impresion de pantalla
         y k es el input de la tecla que se guarda como valor entero **/
-	
+
 	int i=0,j=0,k=0;
 
 	while (true)
@@ -2379,4 +2379,3 @@ bool BossBattle(){
     	return false;
 
 }
-
