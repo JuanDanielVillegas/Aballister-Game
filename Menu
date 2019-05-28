@@ -302,6 +302,7 @@ int main()
  **/
 
 void informacion(){
+    setlocale(LC_ALL, "");
     string auxiliarInf;
     cout << " Puntos importantes:" << endl;
     cout << " -El mago puede atacar a más de un oponente" << endl;
@@ -346,6 +347,8 @@ void informacion(){
             valido= false;
         }
     } while(valido!=true);
+    setlocale(LC_ALL, "C");
+
 }
 
 /**
@@ -358,6 +361,7 @@ void informacion(){
  **/
 
 void menu(){
+    setlocale(LC_ALL, "");
     string userChoice;
     bool Valido=false;
     while(Valido==false){
@@ -398,6 +402,8 @@ void menu(){
             Valido= false;
         }
     }
+    setlocale(LC_ALL, "C");
+
 }
 
 /**
